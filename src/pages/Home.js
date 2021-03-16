@@ -1,28 +1,27 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useQuery } from "@apollo/client"
 import { Grid, Transition, Icon, Card , Button} from 'semantic-ui-react'
-
+import { useMutation } from '@apollo/client'
 import PostCard from './../components/PostCard'
+import KeyCard from './../components/KeyCard'
 import PostForm from './../components/PostForm'
-
-import { FETCH_POSTS_QUERY } from './../util/graphql'
 
 import { AuthContext } from './../context/auth'
 
 export default function Home() {
   const { user } = useContext(AuthContext)
-  const { loading, data: { getPosts: posts } = {} } = useQuery(FETCH_POSTS_QUERY)
+  // const { loading, data: { getPosts: posts } = {}} = useQuery(FETCH_POSTS_QUERY)
 
+  console.log(user)
   return (
     <Grid columns={1}>
-
       <Grid.Column width={16}>
         <Grid.Row className="page-title">
           {
             user ? (
-              <h1>Olá, {user.username}.</h1>
+              <h3>Olá, {user.username}.</h3>
             ) : (
-              <h1>Olá. Registre-se para desfrutar das funções do sistema.</h1>
+              <h3>Olá. Registre-se para desfrutar das funções do sistema.</h3>
             )
           }
           
@@ -59,7 +58,7 @@ export default function Home() {
       <Grid.Column width={10}>
         <Grid columns={1}>
           <Grid.Row>
-            {user && (
+            {/* {user && (
               <Grid.Column>
                 <PostForm />
               </Grid.Column>
@@ -77,14 +76,22 @@ export default function Home() {
                 }
               </Transition.Group>
             )
-          }
+          } */}
+
+
+            <Transition.Group>
+              {
+                user && user.keys && user.keys.map(keyItem => (
+                    <Grid.Column key={keyItem.id} style={{ marginBottom: "2rem" }}>
+                      <KeyCard keyItem={keyItem} />
+                    </Grid.Column>
+                  ))
+              }
+            </Transition.Group>
+
           </Grid.Row>
         </Grid>
       </Grid.Column>
-
     </Grid>
-
-
-
   )
 }
