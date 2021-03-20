@@ -26,18 +26,6 @@ export default function UserHome() {
   console.log(user)
   return (
     <Grid columns={1}>
-      <Grid.Column width={16}>
-        <Grid.Row className="page-title">
-          {
-            user ? (
-              <h3>Olá, {user.username}.</h3>
-            ) : (
-              <h3>Olá. Registre-se para desfrutar das funções do sistema.</h3>
-            )
-          }
-          
-        </Grid.Row>
-      </Grid.Column>
       <Grid.Column width={6}>
         <Grid.Row>
           {user && (
@@ -52,10 +40,6 @@ export default function UserHome() {
                 </Card.Content>
                 <Card.Content extra>
                   <div className='ui two buttons' style={{ display: 'flex', flexDirection: 'column', alignItems: 'start'}}>
-                    {/* <Button color='teal'>
-                      <Icon name='list' />
-                    </Button> */}
-
                     <Button color='blue' basic>
                       <Icon name='add' />
                     </Button>
