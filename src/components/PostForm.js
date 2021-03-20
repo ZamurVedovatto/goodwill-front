@@ -34,7 +34,7 @@ export default function PostForm() {
   return (
     <>
       <Form onSubmit={onSubmit}>
-        <h2>Enviar Mensagem</h2>
+        <h2>Send message</h2>
         <Form.Field>
           <Form.Input
             placeholder="Hi World"

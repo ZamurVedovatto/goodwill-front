@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { Container } from 'semantic-ui-react'
+import { Container, Image } from 'semantic-ui-react'
 
 import 'semantic-ui-css/semantic.min.css'
 import './App.css';
@@ -13,20 +13,20 @@ import UserHome from './pages/UserHome'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import SinglePost from './pages/SinglePost'
+import logoImg from './assets/logo.svg'
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <Container>
-          <MenuBar />
-          <Route exact path='/' component={Home} />
-          <Route exact path='/user' component={UserHome} />
-          <AuthRoute exact path='/login' component={Login} />
-          <AuthRoute exact path='/register' component={Register} />
-          <Route exact path="/posts/:postId" component={SinglePost} />
-        </Container>
+        <MenuBar />
+        <Route exact path='/' component={Home} />
+        <Route exact path='/user' component={UserHome} />
+        <AuthRoute exact path='/login' component={Login} />
+        <AuthRoute exact path='/register' component={Register} />
+        <Route exact path="/posts/:postId" component={SinglePost} />
       </Router>
+      <Image className="img-footer" src={logoImg} />
     </AuthProvider>
   );
 }
