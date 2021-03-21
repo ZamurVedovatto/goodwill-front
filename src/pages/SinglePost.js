@@ -13,7 +13,7 @@ export default function SinglePost(props) {
   const { user } = useContext(AuthContext)
   const commentInputRef = useRef(null)
   const postId = props.match.params.postId
-  // const [comment, setComment] = useState('')
+  const [comment, setComment] = useState('')
 
   const { data: { getPost } = {}} = useQuery(FETCH_POST_QUERY, {
     variables: {
@@ -21,16 +21,16 @@ export default function SinglePost(props) {
     }
   })
 
-  // const [submitComment] = useMutation(SUBMIT_COMMENT_MUTATION, {
-  //   update(){
-  //     setComment('')
-  //     commentInputRef.current.blur()
-  //   },
-  //   variables: {
-  //     postId,
-  //     body: comment
-  //   }
-  // })
+  const [submitComment] = useMutation(SUBMIT_COMMENT_MUTATION, {
+    update(){
+      setComment('')
+      commentInputRef.current.blur()
+    },
+    variables: {
+      postId,
+      body: comment
+    }
+  })
 
   function deletePostCallback() {
     props.history.push('/')
@@ -87,7 +87,7 @@ export default function SinglePost(props) {
                   <Card.Content>
                     <p>Post a comment</p>
                     <Form>
-                      {/* <div className="ui action input fluid">
+                      <div className="ui action input fluid">
                         <input
                           type="text"
                           placeholder="Comment..."
@@ -104,7 +104,7 @@ export default function SinglePost(props) {
                         >
                           Submit
                         </button>
-                      </div> */}
+                      </div>
                     </Form>
                   </Card.Content>
                 </Card>
@@ -133,20 +133,20 @@ export default function SinglePost(props) {
   return postMarkup
 }
 
-// const SUBMIT_COMMENT_MUTATION = gql`
-//   mutation($postId: String!, $body: String!){
-//     createComment(postId: $postId, body: $body) {
-//       id
-//       comments{
-//         id
-//         body
-//         createdAt
-//         username
-//       }
-//       commentCount
-//     }
-//   }
-// `
+const SUBMIT_COMMENT_MUTATION = gql`
+  mutation($postId: String!, $body: String!){
+    createComment(postId: $postId, body: $body) {
+      id
+      comments{
+        id
+        body
+        createdAt
+        username
+      }
+      commentCount
+    }
+  }
+`
 
 const FETCH_POST_QUERY = gql`
   query($postId: ID!) {

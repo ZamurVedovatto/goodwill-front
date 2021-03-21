@@ -96,7 +96,7 @@ const LOGIN_USER = gql `
         confirmed
         active
         createdAt
-        plate
+        key
       }
     }
   }

@@ -31,7 +31,7 @@ export const FETCH_KEYS_QUERY = gql`
     active
     createdAt
     username
-    plate
+    key
   }
 }
 `
@@ -45,7 +45,7 @@ export const FETCH_USER_KEYS_QUERY = gql`
       active
       createdAt
       username
-      plate
+      key
     }
   }
 `

@@ -43,6 +43,12 @@ export default function MenuBar() {
             >
               Keys & Actions
             </Dropdown.Item>
+            <Dropdown.Item
+              as={Link}
+              to="/user"
+            >
+              Settings
+            </Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item
               name='logout'

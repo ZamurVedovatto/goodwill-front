@@ -7,7 +7,7 @@ import { AuthContext } from './../context/auth'
 import DeleteButton from './../components/DeleteButton'
 import CustomPopup from '../util/CustomPopup'
 
-export default function KeyCard({ keyItem: { id, type, confirmed, active, createdAt, username, plate }}) {
+export default function KeyCard({ keyItem: { id, type, confirmed, active, createdAt, username, key }}) {
   const { user } = useContext(AuthContext)
 
   return (
@@ -21,7 +21,7 @@ export default function KeyCard({ keyItem: { id, type, confirmed, active, create
         />
         <Card.Header>{type}</Card.Header>
         <Card.Meta as={Link} to={`/keys/${id}`}>{moment(createdAt).format("DD/MM/YY")}</Card.Meta>
-        <Card.Description className="description-cutted">{plate}</Card.Description>
+        <Card.Description className="description-cutted">{key}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         {
