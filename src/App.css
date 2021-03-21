@@ -49,7 +49,7 @@ body {
 }
 
 .img-footer {
-  position: absolute !important;
+  position: fixed !important;
   bottom: 1rem;
   right: 2rem;
   width: 4rem;

@@ -14,6 +14,7 @@ import UserSettings from './pages/UserSettings'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import SinglePost from './pages/SinglePost'
+import AddKey from './pages/AddKey'
 import logoImg from './assets/logo.svg'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <MenuBar />
         <Route exact path='/' component={Home} />
         <Route exact path='/user' component={UserHome} />
+        <Route exact path='/user/addkey' component={AddKey} />
         <Route exact path='/settings' component={UserSettings} />
         <AuthRoute exact path='/login' component={Login} />
         <AuthRoute exact path='/register' component={Register} />

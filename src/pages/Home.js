@@ -1,11 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { useQuery } from "@apollo/client"
-import { Grid, Image, Segment, Transition, Icon, Card , Button, Form, Accordion, Container } from 'semantic-ui-react'
+import { Grid, Image, Container } from 'semantic-ui-react'
 
 import HomeContent from './../components/HomeContent'
 import { AuthContext } from './../context/auth'
 import { FETCH_POSTS_QUERY } from './../util/graphql'
 import bgImg from './../assets/bg.png'
+import PostForm from '../components/PostForm'
 
 export default function Home() {
   const { user } = useContext(AuthContext)
@@ -23,6 +24,17 @@ export default function Home() {
             }
           </Grid.Row>
         </Grid.Column>
+        <Grid.Column width={16}>
+          <Grid columns={1}>
+            <Grid.Row>
+              {user && (
+                <Grid.Column>
+                  <PostForm />
+                </Grid.Column>
+              )} 
+            </Grid.Row>
+          </Grid>
+        </Grid.Column>
         { 
           (user && posts) && (
           <Grid.Column width={16}>
@@ -30,34 +42,7 @@ export default function Home() {
           </Grid.Column>
           )
         }
-        {/* <Grid.Column width={10}>
-          <Grid columns={1}>
-            <Grid.Row>
-              {user && (
-                <Grid.Column>
-                  <PostForm />
-                </Grid.Column>
-              )}
-              {loading ? (
-                <h1>Loading posts...</h1>
-              ) : (
-                <Transition.Group>
-                  {
-                    posts && posts.map(post => (
-                      <Grid.Column key={post.id} style={{ marginBottom: "2rem" }}>
-                        <PostCard post={post} />
-                      </Grid.Column>
-                    ))
-                  }
-                </Transition.Group>
-              )
-            }
-  
-            </Grid.Row>
-          </Grid>
-        </Grid.Column> */}
       </Grid>
-    
     </Container>
   )
 }
