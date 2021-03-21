@@ -13,6 +13,7 @@ export default function Register(props) {
   const { onChange, onSubmit, values } = useForm(registerUser, {
     username: '',
     email: '',
+    name: '',
     password: '',
     confirmPassword: ''
   })
@@ -53,6 +54,15 @@ export default function Register(props) {
           type="email"
           value={values.email}
           error={errors.email ? true : false}
+          onChange={onChange}
+        />
+        <Form.Input
+          label="Name"
+          placeholder="Name"
+          name="name"
+          type="text"
+          value={values.name}
+          error={errors.name ? true : false}
           onChange={onChange}
         />
         <Form.Input
@@ -100,6 +110,7 @@ const REGISTER_USER = gql `
   mutation register(
     $username: String!
     $email: String!
+    $name: String!
     $password: String!
     $confirmPassword: String!
   ) {
@@ -107,6 +118,7 @@ const REGISTER_USER = gql `
       registerInput: {
         username: $username
         email: $email
+        name: $name
         password: $password
         confirmPassword: $confirmPassword
       }
@@ -114,6 +126,7 @@ const REGISTER_USER = gql `
       id
       email
       username
+      name
       createdAt
       token
     }
