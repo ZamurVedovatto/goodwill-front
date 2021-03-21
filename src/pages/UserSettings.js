@@ -3,6 +3,7 @@ import { Grid, Image, Container, Menu, Segment, Button, Form, Input, Confirm, Ic
 import { AuthContext } from './../context/auth'
 import bgImg from './../assets/bg.png'
 import DeleteUserButton from '../components/DeleteUserButton'
+import UserProfileForm from '../components/UserProfileForm'
 
 export default function UserSettings() {
   const { user, logout } = useContext(AuthContext)
@@ -21,7 +22,6 @@ export default function UserSettings() {
   }
 
   function deleteUserCallback() {
-    // props.history.push('/')
     logout()
   }
 
@@ -53,72 +53,42 @@ export default function UserSettings() {
                     active={activeItem === 'change password'}
                     onClick={handleItemClick}
                   />
+                  <Menu.Item
+                    name='delete account'
+                    active={activeItem === 'delete account'}
+                    onClick={handleItemClick}
+                  />
                 </Menu>
               </Grid.Column>
 
               <Grid.Column width={12}>
                 {
-                  loading && (
-                    <Segment loading>
-                      <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-                    </Segment>
-                  )
-                }
-
-                {
                   activeItem === 'edit profile' && (
                     <Segment>
-                      <Grid columns="1">
-                        <Grid.Row>
-                          <Grid.Column width={16}>
-                            {user.username}
-                          </ Grid.Column>
-
-                          <Grid.Column width={16}>
-                            <Form>
-                              <Form.Field inline>
-                                <label>username</label>
-                                <Input placeholder={user.username} />
-                              </Form.Field>
-                              <Form.Field inline>
-                                <label>name</label>
-                                <Input placeholder='name' />
-                              </Form.Field>
-                              <Form.Field inline>
-                                <label>email</label>
-                                <Input placeholder={user.email} readOnly />
-                              </Form.Field>
-                              <Form.Field>
-                                <Button>Submit</Button>
-                              </Form.Field>
-                            </Form>
-                          </Grid.Column>
-                        </Grid.Row>
-                      </Grid>
-
-                      <Segment>
-                        <DeleteUserButton userId={user.id} callback={deleteUserCallback} />
-                      </Segment>
+                      <UserProfileForm user={user} />
                     </Segment>
                   )
                 }
-
                 {
                   activeItem === 'change password' && (
-                    <Segment circular floated='right'>
+                    <Segment>
                       change password
                     </Segment>
                   )
                 }
-
+                {
+                  activeItem === 'delete account' && (
+                    <Segment loading={loading}>
+                      <DeleteUserButton userId={user.id} callback={deleteUserCallback} />
+                    </Segment>
+                  )
+                }
               </Grid.Column>
-              
             </Grid>
           </Grid.Column>
           )
         }
       </Grid>
-    
     </Container>
   )
 }
