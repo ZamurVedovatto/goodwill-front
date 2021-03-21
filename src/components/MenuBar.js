@@ -20,7 +20,7 @@ export default function MenuBar() {
         <Menu borderless secondary size="massive" color="teal" style={{ marginBottom: "0" }}>
           <Menu.Menu>
             <Menu.Item
-              icon="chess queen"
+              icon="home"
               active={activeItem === 'goodwill'}
               as={Link}
               to="/"
@@ -34,30 +34,42 @@ export default function MenuBar() {
           </Menu.Menu>
         </Menu>
         
-        <Dropdown icon='user'>
-          <Dropdown.Menu direction="left">
-            {/* <Dropdown.Header>User Settings</Dropdown.Header> */}
-            <Dropdown.Item
-              as={Link}
-              to="/user"
-            >
-              Keys & Actions
-            </Dropdown.Item>
-            <Dropdown.Item
-              as={Link}
-              to="/user"
-            >
-              Settings
-            </Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item
-              name='logout'
-              onClick={logout}
-            >
-              Logout
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <Menu.Menu>
+          <Menu.Item
+            icon="send"
+            color="olive"
+            active={activeItem === 'send'}
+            as={Link}
+            to="/"
+            style={{marginRight: "1rem"}}
+          />
+          <Dropdown icon='user'>
+            <Dropdown.Menu direction="left">
+              {/* <Dropdown.Header>User Settings</Dropdown.Header> */}
+              <Dropdown.Item
+                as={Link}
+                to="/user"
+              >
+                Keys & Actions
+              </Dropdown.Item>
+              <Dropdown.Item
+                as={Link}
+                to="/user"
+              >
+                Settings
+              </Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item
+                name='logout'
+                onClick={logout}
+              >
+                Logout
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
+        </Menu.Menu>
+
       </div>
     </div>
   ) : (

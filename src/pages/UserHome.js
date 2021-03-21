@@ -13,6 +13,7 @@ import { FETCH_POSTS_QUERY } from './../util/graphql'
 
 export default function UserHome() {
   const { user } = useContext(AuthContext)
+  const [action, setAction] = useState(null)
   const { loading, data: { getPosts: posts } = {}} = useQuery(FETCH_POSTS_QUERY)
 
   const panels = [
@@ -23,12 +24,16 @@ export default function UserHome() {
     },
   ]
 
+  const onAddKey = () => {
+    (action === null) ? setAction('add-key') : setAction(null)
+  }
+
   console.log(user)
   return (
     <Container className="container-wrapper">
 
       <Grid columns={1}>
-        <Grid.Column width={7}>
+        <Grid.Column width={action === null ? 16 : 7}>
           <Grid.Row>
             {user && (
               <Grid.Column>
@@ -36,7 +41,7 @@ export default function UserHome() {
                 <Card.Content extra>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
                     <Button>
-                      <Icon name='add' />
+                      <Icon name='add' onClick={() => onAddKey()} />
                     </Button>
                   </div>
                   </Card.Content>
@@ -55,19 +60,25 @@ export default function UserHome() {
             )}
           </Grid.Row>
         </Grid.Column>
-        <Grid.Column width={9}>
-          <Segment>
-            <Grid columns={1}>
-              <Grid.Row>
-                {user && (
-                  <Grid.Column>
-                    <PostForm />
-                  </Grid.Column>
-                )}
-              </Grid.Row>
-            </Grid>
-          </Segment>
-        </Grid.Column>
+        {
+          (action == 'add-key') && (
+            <Grid.Column width={9}>
+              <Segment>
+                <Grid columns={1}>
+                  <Grid.Row>
+                    {user && (
+                      <Grid.Column>
+                        <PostForm />
+                      </Grid.Column>
+                    )}
+                  </Grid.Row>
+                </Grid>
+              </Segment>
+            </Grid.Column>
+
+          )
+        }
+
       </Grid>
     
     </Container>

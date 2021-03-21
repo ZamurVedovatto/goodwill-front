@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { useQuery } from "@apollo/client"
 import { Grid, Image, Segment, Transition, Icon, Card , Button, Form, Accordion, Container } from 'semantic-ui-react'
-import { useMutation } from '@apollo/client'
 
 import HomeContent from './../components/HomeContent'
 import PostCard from './../components/PostCard'
@@ -10,9 +9,7 @@ import PostForm from './../components/PostForm'
 import KeyList from './../components/KeyList'
 
 import { AuthContext } from './../context/auth'
-
 import { FETCH_POSTS_QUERY } from './../util/graphql'
-
 import bgImg from './../assets/bg.png'
 
 
@@ -20,18 +17,8 @@ export default function Home() {
   const { user } = useContext(AuthContext)
   const { loading, data: { getPosts: posts } = {}} = useQuery(FETCH_POSTS_QUERY)
 
-  // const panels = [
-  //   {
-  //     key: 'details',
-  //     title: 'Listar minhas chaves',
-  //     content: {content: user ? <KeyList keys={user.keys}/> : null } ,
-  //   },
-  // ]
-
-  console.log(user)
   return (
     <Container>
-
       <Grid columns={1}>
         <Grid.Column width={16}>
           <Grid.Row className="page-title">
@@ -43,7 +30,7 @@ export default function Home() {
           </Grid.Row>
         </Grid.Column>
         { 
-          user && (
+          (user && posts) && (
           <Grid.Column width={16}>
             <HomeContent posts={posts} />
           </Grid.Column>
