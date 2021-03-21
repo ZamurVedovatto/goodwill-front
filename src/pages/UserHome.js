@@ -1,48 +1,37 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { useQuery } from "@apollo/client"
-import { Grid, Transition, Icon, Card , Button, Form, Accordion, Container, Segment } from 'semantic-ui-react'
-import { useMutation } from '@apollo/client'
-import PostCard from './../components/PostCard'
-import KeyCard from './../components/KeyCard'
+import { Grid, Icon, Card , Button, Container, Segment } from 'semantic-ui-react'
 import PostForm from './../components/PostForm'
 import KeyList from './../components/KeyList'
 
 import { AuthContext } from './../context/auth'
-
 import { FETCH_POSTS_QUERY } from './../util/graphql'
+import KeyAddModal from '../components/KeyAddModal'
 
 export default function UserHome() {
   const { user } = useContext(AuthContext)
   const [action, setAction] = useState(null)
   const { loading, data: { getPosts: posts } = {}} = useQuery(FETCH_POSTS_QUERY)
 
-  const panels = [
-    {
-      key: 'details',
-      title: 'Listar minhas chaves',
-      content: {content: user ? <KeyList keys={user.keys}/> : null } ,
-    },
-  ]
-
   const onAddKey = () => {
     (action === null) ? setAction('add-key') : setAction(null)
   }
 
-  console.log(user)
   return (
     <Container className="container-wrapper">
 
       <Grid columns={1}>
-        <Grid.Column width={action === null ? 16 : 7}>
+        <Grid.Column width={16}>
           <Grid.Row>
             {user && (
               <Grid.Column>
                 <Card fluid>
                 <Card.Content extra>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
-                    <Button>
-                      <Icon name='add' onClick={() => onAddKey()} />
-                    </Button>
+                    {/* <Button>
+                      <Icon name='add' onClick={() => onAddKey()} style={{margin: 0}} />
+                    </Button> */}
+                    <KeyAddModal />
                   </div>
                   </Card.Content>
                   <Card.Content>
@@ -53,32 +42,13 @@ export default function UserHome() {
                     </Card.Description>
                   </Card.Content>
                   <Card.Content>
-                    <KeyList />
+                    <KeyList keys={user.keys} />
                   </Card.Content>
                 </Card>
               </Grid.Column>
             )}
           </Grid.Row>
         </Grid.Column>
-        {
-          (action == 'add-key') && (
-            <Grid.Column width={9}>
-              <Segment>
-                <Grid columns={1}>
-                  <Grid.Row>
-                    {user && (
-                      <Grid.Column>
-                        <PostForm />
-                      </Grid.Column>
-                    )}
-                  </Grid.Row>
-                </Grid>
-              </Segment>
-            </Grid.Column>
-
-          )
-        }
-
       </Grid>
     
     </Container>
