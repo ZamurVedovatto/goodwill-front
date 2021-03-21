@@ -54,7 +54,7 @@ export default function MenuBar() {
               </Dropdown.Item>
               <Dropdown.Item
                 as={Link}
-                to="/user"
+                to="/settings"
               >
                 Settings
               </Dropdown.Item>

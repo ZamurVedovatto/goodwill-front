@@ -3,15 +3,9 @@ import { useQuery } from "@apollo/client"
 import { Grid, Image, Segment, Transition, Icon, Card , Button, Form, Accordion, Container } from 'semantic-ui-react'
 
 import HomeContent from './../components/HomeContent'
-import PostCard from './../components/PostCard'
-import KeyCard from './../components/KeyCard'
-import PostForm from './../components/PostForm'
-import KeyList from './../components/KeyList'
-
 import { AuthContext } from './../context/auth'
 import { FETCH_POSTS_QUERY } from './../util/graphql'
 import bgImg from './../assets/bg.png'
-
 
 export default function Home() {
   const { user } = useContext(AuthContext)
