@@ -16,10 +16,10 @@ export default function Home() {
     <Container>
       <Grid columns={1}>
         <Grid.Column width={16}>
-          <Grid.Row className="page-title">
+          <Grid.Row className="page-title bg-img">
             {
               !user && !loading && (
-                <Image src={bgImg} fluid rounded />
+                <Image className="bg-img" src={bgImg} fluid />
               )
             }
           </Grid.Row>

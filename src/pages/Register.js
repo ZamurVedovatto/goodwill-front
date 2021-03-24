@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Segment } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
 
@@ -35,7 +35,7 @@ export default function Register(props) {
   }
 
   return (
-    <div className="form-container">
+    <Segment className="login-wrapper">
       <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
         <h1>Register</h1>
         <Form.Input
@@ -102,7 +102,7 @@ export default function Register(props) {
           </div>
         )
       }
-    </div>
+    </Segment>
   )
 }
 

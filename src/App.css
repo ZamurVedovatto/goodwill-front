@@ -8,6 +8,14 @@ body {
   margin-top: 1rem;
 }
 
+.bg-img {
+  width: 100vw !important;
+  margin: 0;
+  height: 100vh !important;
+  position: fixed !important;
+  left: 0;
+}
+
 .form-container {
   width: 400px;
   margin: auto;
@@ -28,7 +36,13 @@ body {
 .container-wrapper {
   width: 100%;
   max-width: 975px;
-  margin: 2rem auto;
+  margin: 2rem auto !important;
+}
+
+.login-wrapper {
+  width: 100%;
+  max-width: 420px;
+  margin: 2rem auto !important;
 }
 
 .content-wrapper {
@@ -52,6 +66,9 @@ body {
   position: fixed !important;
   bottom: 1rem;
   right: 2rem;
-  width: 4rem;
+  width: 3rem;
   height: auto;
+}
+.dropdown .text {
+  margin-right: .5rem;
 }

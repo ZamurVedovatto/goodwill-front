@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
-import { Menu, Dropdown, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+
+import { Menu, Dropdown } from 'semantic-ui-react'
 import { AuthContext } from './../context/auth'
 
 import SearchStandard from './../components/SearchStandard'
@@ -9,7 +10,6 @@ export default function MenuBar() {
   const { user, logout } = useContext(AuthContext)
   const pathname = window.location.pathname
   const path = pathname === '/' ? 'home' : pathname.substring(1)
-  
   const [activeItem, setActiveItem] = useState(path)
   
   const handleItemClick = (e, { name }) => setActiveItem(name)
@@ -17,7 +17,7 @@ export default function MenuBar() {
   const menuBar = user ? (
     <div className="content-wrapper">
       <div className="menu-content">
-        <Menu borderless secondary size="massive" color="teal" style={{ marginBottom: "0" }}>
+        <Menu borderless color="teal" style={{ marginBottom: "0" }}>
           <Menu.Menu>
             <Menu.Item
               icon="home"
@@ -26,24 +26,14 @@ export default function MenuBar() {
               to="/"
             />
           </Menu.Menu>
-
           <Menu.Menu style={{ margin: "0 auto"}}>
             <Menu.Item>
               <SearchStandard />
             </Menu.Item>
           </Menu.Menu>
         </Menu>
-        
         <Menu.Menu>
-          <Menu.Item
-            icon="send"
-            color="olive"
-            active={activeItem === 'send'}
-            as={Link}
-            to="/"
-            style={{marginRight: "1rem"}}
-          />
-          <Dropdown icon='user'>
+          <Dropdown icon="user" text={user.username}>
             <Dropdown.Menu direction="left">
               {/* <Dropdown.Header>User Settings</Dropdown.Header> */}
               <Dropdown.Item
@@ -67,23 +57,20 @@ export default function MenuBar() {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-
         </Menu.Menu>
-
       </div>
     </div>
   ) : (
     <div className="content-wrapper">
       <div className="menu-content">
-
-        <Menu borderless secondary size="massive" color="teal">
+        <Menu borderless color="blue" attached="top">
           <Menu.Item
             icon="chess queen"
             active={activeItem === 'goodwill'}
             as={Link}
             to="/"
           />
-          <Menu.Menu position='right'>
+          <Menu.Menu position="right">
             <Menu.Item
               name='login'
               active={activeItem === 'login'}
@@ -100,11 +87,8 @@ export default function MenuBar() {
             />
           </Menu.Menu>
         </Menu>
-      
       </div>
-
     </div>
   )
-
   return menuBar
 }

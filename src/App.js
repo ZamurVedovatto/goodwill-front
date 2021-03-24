@@ -16,19 +16,21 @@ import Login from './pages/Login'
 import SinglePost from './pages/SinglePost'
 import AddKey from './pages/AddKey'
 import logoImg from './assets/logo.svg'
+import CompanyProfile from './pages/CompanyProfile';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <MenuBar />
+        <Route exact path='/company' component={CompanyProfile} />
         <Route exact path='/' component={Home} />
-        <Route exact path='/user' component={UserHome} />
-        <Route exact path='/user/addkey' component={AddKey} />
-        <Route exact path='/settings' component={UserSettings} />
+        <AuthRoute exact path='/user' component={UserHome} />
+        <AuthRoute exact path='/user/addkey' component={AddKey} />
+        <AuthRoute exact path='/settings' component={UserSettings} />
         <AuthRoute exact path='/login' component={Login} />
         <AuthRoute exact path='/register' component={Register} />
-        <Route exact path="/posts/:postId" component={SinglePost} />
+        <AuthRoute exact path="/posts/:postId" component={SinglePost} />
       </Router>
       <Image className="img-footer" src={logoImg} />
     </AuthProvider>
