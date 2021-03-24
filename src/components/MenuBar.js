@@ -25,6 +25,12 @@ export default function MenuBar() {
               as={Link}
               to="/"
             />
+            <Menu.Item
+              content="Companies"
+              active={activeItem === 'company'}
+              as={Link}
+              to="/company"
+            />
           </Menu.Menu>
           <Menu.Menu style={{ margin: "0 auto"}}>
             <Menu.Item>

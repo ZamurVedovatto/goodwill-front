@@ -30,6 +30,11 @@ export default function CompanyProfile() {
         />
         <Button
           size={"small"}
+          content="Loja com Ecommerce"
+          onClick={() => setCompany("lojae")}
+        />
+        <Button
+          size={"small"}
           content="Bar"
           onClick={() => setCompany("bar")}
         />
@@ -116,51 +121,111 @@ export default function CompanyProfile() {
                     </Card.Content>
                     <hr />
                     <Card.Content>
-                      <Button
-                        content="Seguir"
-                        labelPosition='right'
-                        icon='checkmark'
-                        onClick={() => console.log('seguir')}
-                        positive
-                      />
-                      <Button
-                        icon='star'
-                        color="yellow"
-                        onClick={() => console.log('favoritar')}
-                      />
+
+                    <Segment style={{ display: "flex", flexDirection: "column", flexWrap: "wrap" }}>
+                      <Card.Header style={{ width: "100%", textAlign: "right", marginBottom: "1rem" }}>
+                        <Button
+                          content="Seguir"
+                          labelPosition='right'
+                          icon='checkmark'
+                          onClick={() => console.log('seguir')}
+                          positive
+                        />
+                        <Button
+                          icon='star'
+                          color="yellow"
+                          onClick={() => console.log('favoritar')}
+                        />
+                      </Card.Header>
                       <p>Esta companhia possui chaves próprias para os seus clientes. Você possui <span style={{ fontWeight:"bold" }}>NÚMERO DE REGISTRO</span>?</p>
                       <p>[  ] Sim</p>
                       <p>[  ] Não. <a href="">Desejo contactar empresa.</a></p>
-      
-                      <hr />
-                      <p>Receber notificações</p>
-                      <p>[ ] todas</p>
-                      <p>[ ] outra</p>
-                      <p>[ ] otura</p>
-                      <p>[ ] outar</p>
+                    </Segment>
 
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <Card as={Button} color="teal" style={{ margin: ".5rem" }}>
+
+
+
+      
+                      <Segment style={{ display: "flex", flexDirection: "column", flexWrap: "wrap" }}>
+                        <Card.Header style={{ width: "100%", textAlign: "left", marginBottom: "1rem" }}>
+                          <h3>Controle de Notificações</h3>
+                        </Card.Header>
+                        <p>Receber notificações</p>
+                        <p>[ ] todas</p>
+                        <p>[ ] outra</p>
+                        <p>[ ] otura</p>
+                        <p>[ ] outar</p>
+                      </Segment>
+
+
+
+                      <Segment style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}>
+                        <Card.Header style={{ width: "100%", textAlign: "left", marginBottom: "1rem" }}>
+                          <h3>Atendimento ao Usuário</h3>
+                        </Card.Header>
+
+                        <Card as={Button} size={'large'} color="teal" style={{ width: "22%", margin: ".5rem" }}>
                           <Card.Content>
                             <p>Pagamento de Conta</p>
                           </Card.Content>
                         </Card>
-                        <Card as={Button} color="teal" style={{ margin: ".5rem" }}>
+                        <Card as={Button} size={'large'} color="teal" style={{ width: "22%", margin: ".5rem" }}>
                           <Card.Content>
                             <p>Segunda via Boleto</p>
                           </Card.Content>
                         </Card>
-                        <Card as={Button} color="teal" style={{ margin: ".5rem" }}>
+                        <Card as={Button} size={'large'} color="teal" style={{ width: "22%", margin: ".5rem" }}>
                           <Card.Content>
                             <p>Alterar dados cadastrais</p>
                           </Card.Content>
                         </Card>
-                        <Card as={Button} color="teal" style={{ margin: ".5rem" }}>
+
+                        <Card as={Button} size={'large'} color="teal" style={{ width: "22%", margin: ".5rem" }}>
+                          <Card.Content>
+                            <p>Segunda via Boleto</p>
+                          </Card.Content>
+                        </Card>
+                        <Card as={Button} size={'large'} color="teal" style={{ width: "22%", margin: ".5rem" }}>
+                          <Card.Content>
+                            <p>Alterar dados cadastrais</p>
+                          </Card.Content>
+                        </Card>
+                        <Card as={Button} size={'large'} color="teal" style={{ width: "22%", margin: ".5rem" }}>
                           <Card.Content>
                             <p>Entrar em contato</p>
                           </Card.Content>
                         </Card>
-                      </div>
+                        <Card as={Button} size={'large'} color="teal" style={{ width: "22%", margin: ".5rem" }}>
+                          <Card.Content>
+                            <p>Segunda via Boleto</p>
+                          </Card.Content>
+                        </Card>
+                        <Card as={Button} size={'large'} color="teal" style={{ width: "22%", margin: ".5rem" }}>
+                          <Card.Content>
+                            <p>Alterar dados cadastrais</p>
+                          </Card.Content>
+                        </Card>
+                        <Card as={Button} size={'large'} color="teal" style={{ width: "22%", margin: ".5rem" }}>
+                          <Card.Content>
+                            <p>Entrar em contato</p>
+                          </Card.Content>
+                        </Card>
+                        <Card as={Button} size={'large'} color="teal" style={{ width: "22%", margin: ".5rem" }}>
+                          <Card.Content>
+                            <p>Segunda via Boleto</p>
+                          </Card.Content>
+                        </Card>
+                        <Card as={Button} size={'large'} color="teal" style={{ width: "22%", margin: ".5rem" }}>
+                          <Card.Content>
+                            <p>Alterar dados cadastrais</p>
+                          </Card.Content>
+                        </Card>
+                        <Card as={Button} size={'large'} color="teal" style={{ width: "22%", margin: ".5rem" }}>
+                          <Card.Content>
+                            <p>Entrar em contato</p>
+                          </Card.Content>
+                        </Card>
+                      </Segment>
                     </Card.Content>
                     <Card.Content extra>
                       <Button
@@ -321,6 +386,77 @@ export default function CompanyProfile() {
               </Grid.Row>
             )
           }
+
+
+
+
+
+
+          {
+            company === 'lojae' && (
+              <Grid.Row>
+                <Grid.Column width={16}>
+                  <Card fluid>
+                    <Card.Content>
+                      <Card.Header>ECOMMERCE</Card.Header>
+                      <Card.Meta>{moment(new Date()).fromNow()}</Card.Meta>
+                      <Card.Description>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate sapiente est odit nisi veniam culpa dolor illum sequi nobis! Voluptatem.</Card.Description>
+                    </Card.Content>
+                    <hr />
+                    <Card.Content>
+                      <Button
+                        content="Seguir"
+                        labelPosition='right'
+                        icon='checkmark'
+                        onClick={() => console.log('seguir')}
+                        positive
+                      />
+                      <Button
+                        icon='star'
+                        color="yellow"
+                        onClick={() => console.log('favoritar')}
+                      />
+                      <hr />
+                      <p>Modelar processo de venda, com carrinho, checkout e pagamento</p>
+
+
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <Card as={Button} style={{ margin: ".5rem" }}>
+                          <Card.Content>
+                            <h2>Camisetas Masculinas</h2>
+                          </Card.Content>
+                        </Card>
+                        <Card as={Button} style={{ margin: ".5rem" }}>
+                          <Card.Content>
+                          <h2>Camisetas Femininas</h2>
+                          </Card.Content>
+                        </Card>
+                      </div>
+
+                    </Card.Content>
+                    <Card.Content extra>
+                      <Button
+                        as="div"
+                        labelPosition="right"
+                        onClick={() => console.log('comment on post')}
+                      >
+                        <Button basic color="blue">
+                          <Icon name="comments" />
+                        </Button>
+                        <Label basic color="blue" pointing="left">
+                          {12}
+                        </Label>
+                      </Button>
+      
+                    </Card.Content>
+                  </Card>
+                </Grid.Column>
+              </Grid.Row>
+            )
+          }
+
+
+
 
 
 

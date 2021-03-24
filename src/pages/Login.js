@@ -84,19 +84,12 @@ const LOGIN_USER = gql `
       username: $username
       password: $password
     ){
-      id
       email
       username
-      createdAt
+      id
       token
-      keys {
-        id
-        type
-        confirmed
-        active
-        createdAt
-        key
-      }
+      name
+      createdAt
     }
   }
 `
