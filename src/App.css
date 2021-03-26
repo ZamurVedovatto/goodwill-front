@@ -9,11 +9,12 @@ body {
 }
 
 .bg-img {
-  width: 100vw !important;
+  /* width: 100vw !important;
   margin: 0;
   height: 100vh !important;
   position: fixed !important;
-  left: 0;
+  left: 0; */
+  box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
 }
 
 .form-container {

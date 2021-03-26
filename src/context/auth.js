@@ -3,7 +3,6 @@ import jwtDecode from 'jwt-decode'
 
 const initialState = {
   user: null,
-  keys: []
 }
 
 if(localStorage.getItem('jwtToken')) {
@@ -45,10 +44,12 @@ function AuthProvider(props) {
   const [state, dispatch] = useReducer(authReducer, initialState)
 
   function login(userData) {
-    localStorage.setItem('jwtToken', userData.token)
+    const data = userData
+    console.log(data)
+    localStorage.setItem('jwtToken', data.user.token)
     dispatch({
       type: 'LOGIN',
-      payload: userData
+      payload: data
     })
   }
 
