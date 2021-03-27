@@ -5,13 +5,23 @@ import PostForm from './../components/PostForm'
 import KeyList from './../components/KeyList'
 import { Link } from 'react-router-dom'
 import { AuthContext } from './../context/auth'
-import { FETCH_POSTS_QUERY } from './../util/graphql'
+import { FETCH_KEYS_QUERY } from './../util/graphql'
 import KeyAddModal from '../components/KeyAddModal'
 
 export default function UserHome() {
-  const { user } = useContext(AuthContext)
+  const { context, user } = useContext(AuthContext)
   const [action, setAction] = useState(null)
-  const { loading, data: { getPosts: posts } = {}} = useQuery(FETCH_POSTS_QUERY)
+  // const { loading, data: { getKeys: keys } = {}} = useQuery(FETCH_KEYS_QUERY)
+
+  const { data: { getKeys: keys } = {}} = useQuery(FETCH_KEYS_QUERY, {
+    update(proxy) {
+      context.setKeys(keys)
+    },
+    variables: {
+      userId: user.id
+    }
+  })
+
 
   const onAddKey = () => {
     (action === null) ? setAction('add-key') : setAction(null)
@@ -41,7 +51,7 @@ export default function UserHome() {
                     </Card.Description>
                   </Card.Content>
                   <Card.Content>
-                    <KeyList keys={user.keys} />
+                    <KeyList keys={keys} />
                   </Card.Content>
                 </Card>
               </Grid.Column>

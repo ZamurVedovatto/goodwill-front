@@ -3,6 +3,7 @@ import jwtDecode from 'jwt-decode'
 
 const initialState = {
   user: null,
+  keys: []
 }
 
 if(localStorage.getItem('jwtToken')) {
@@ -12,28 +13,37 @@ if(localStorage.getItem('jwtToken')) {
     localStorage.removeItem('jwtToken')
   } else {
     initialState.user = decodedToken
+    console.log(initialState.user)
   }
 }
 
 const AuthContext = createContext({
   user: null,
+  keys: [],
   login: (userData) => {},
   logout: () => {}
 })
 
 function authReducer(state, action) {
-  console.log(action)
+  console.log(action.payload)
   switch (action.type) {
     
     case 'LOGIN':
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
+        keys: action.payload.keys
       }
     case 'LOGOUT':
       return {
         ...state,
-        user: null
+        user: null,
+        keys: []
+      }
+    case 'SET_KEYS':
+      return {
+        ...state,
+        keys: action.payload
       }
     default:
       return state
@@ -60,9 +70,16 @@ function AuthProvider(props) {
     })
   }
 
+  function setKeys(data) {
+    dispatch({
+      type: 'SET_KEYS',
+      payload: data
+    })
+  }
+
   return (
     <AuthContext.Provider
-      value={{ user: state.user, login, logout }}
+      value={{ user: state.user, keys: state.keys, login, logout, setKeys }}
       {...props}
     />
   )

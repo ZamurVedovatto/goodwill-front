@@ -1,11 +1,12 @@
 import React from 'react'
 import { Button, Item } from 'semantic-ui-react'
 
-const KeyList = ({keys}) => {
+const KeyList = ({ keys }) => {
   console.log(keys)
 
   return (
     <Item.Group relaxed divided>
+      <span>KEYLIST</span>
       {
         keys?.map(userKey => (
           <Item key={userKey.id}>
