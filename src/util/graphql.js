@@ -64,6 +64,12 @@ export const CREATE_KEY_MUTATION = gql`
   }
 `
 
+export const DELETE_KEY_MUTATION = gql`
+  mutation deleteKey($userId: ID!, $keyId: ID!) {
+    deleteKey(userId: $userId, keyId: $keyId)
+  }
+`
+
 export const FETCH_POSTS_QUERY = gql`
 {
   getPosts {

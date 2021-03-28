@@ -44,7 +44,6 @@ export default function KeyForm({ user }) {
 
   return (
     <>
-      {JSON.stringify(user)}
       <Form onSubmit={createKeyCallback}>
         <h2>Create Key</h2>
         <Form.Field>

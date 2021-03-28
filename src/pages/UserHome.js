@@ -46,10 +46,10 @@ export default function UserHome() {
                   </Card.Content>
                   <Card.Content>
                     {
-                      loading ? (
+                      (loading || !keys) ? (
                         <span>loading</span>
                       ) : (
-                        <KeyList keys={keys} />
+                        <KeyList keys={keys} user={user} />
                       )
                     }
                   </Card.Content>
