@@ -17,7 +17,7 @@ export default function MenuBar() {
   const menuBar = user ? (
     <div className="content-wrapper">
       <div className="menu-content">
-        <Menu borderless color="teal" style={{ marginBottom: "0", border: "none" }}>
+        <Menu borderless color="teal" style={{ marginBottom: "0", border: "none", boxShadow: "none" }}>
           <Menu.Menu>
             <Menu.Item
               icon="home"
@@ -69,7 +69,7 @@ export default function MenuBar() {
   ) : (
     <div className="content-wrapper">
       <div className="menu-content">
-        <Menu borderless color="blue" attached="top" style={{ border: "none" }}>
+        <Menu borderless color="blue" attached="top" style={{ border: "none", boxShadow: "none" }}>
           <Menu.Item
             icon="chess queen"
             active={activeItem === 'goodwill'}

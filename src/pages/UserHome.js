@@ -2,11 +2,12 @@ import React, { useContext, useEffect } from 'react'
 import { useQuery, useLazyQuery } from "@apollo/client"
 import { Grid, Icon, Card , Button, Container } from 'semantic-ui-react'
 import KeyList from './../components/KeyList'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { AuthContext } from './../context/auth'
 import { FETCH_KEYS_QUERY } from './../util/graphql'
 
 export default function UserHome() {
+  const history = useHistory();
   const { context, user } = useContext(AuthContext)
 
   useEffect(() => {
@@ -15,7 +16,6 @@ export default function UserHome() {
 
   const { loading, data: { getKeys: keys } = {}, refetch} = useQuery(FETCH_KEYS_QUERY, {
     update(proxy) {
-      console.log('entrou')
       context.setKeys(keys)
     },
     variables: {
@@ -48,7 +48,7 @@ export default function UserHome() {
                   </Card.Content>
                   <Card.Content>
                     {
-                      (loading || !keys) ? (
+                      (loading || !keys || !user) ? (
                         <span>loading</span>
                       ) : (
                         <KeyList keys={keys} user={user} refetch={refetch} />
