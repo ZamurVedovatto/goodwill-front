@@ -1,19 +1,19 @@
-import React, { useState, useContext, useEffect } from 'react'
-import { useQuery } from "@apollo/client"
-import { Grid, Icon, Card , Button, Container, Segment } from 'semantic-ui-react'
-import PostForm from './../components/PostForm'
+import React, { useContext, useEffect } from 'react'
+import { useQuery, useLazyQuery } from "@apollo/client"
+import { Grid, Icon, Card , Button, Container } from 'semantic-ui-react'
 import KeyList from './../components/KeyList'
 import { Link } from 'react-router-dom'
 import { AuthContext } from './../context/auth'
 import { FETCH_KEYS_QUERY } from './../util/graphql'
-import KeyAddModal from '../components/KeyAddModal'
 
 export default function UserHome() {
   const { context, user } = useContext(AuthContext)
-  const [action, setAction] = useState(null)
-  // const { loading, data: { getKeys: keys } = {}} = useQuery(FETCH_KEYS_QUERY)
 
-  const { data: { getKeys: keys } = {}} = useQuery(FETCH_KEYS_QUERY, {
+  useEffect(() => {
+    getUserKeys();
+  }, []);
+
+  const [getUserKeys, { loading, data: { getKeys: keys } = {}}] = useLazyQuery(FETCH_KEYS_QUERY, {
     update(proxy) {
       context.setKeys(keys)
     },
@@ -22,14 +22,8 @@ export default function UserHome() {
     }
   })
 
-
-  const onAddKey = () => {
-    (action === null) ? setAction('add-key') : setAction(null)
-  }
-
   return (
     <Container className="container-wrapper">
-
       <Grid columns={1}>
         <Grid.Column width={16}>
           <Grid.Row>
@@ -51,7 +45,13 @@ export default function UserHome() {
                     </Card.Description>
                   </Card.Content>
                   <Card.Content>
-                    <KeyList keys={keys} />
+                    {
+                      loading ? (
+                        <span>loading</span>
+                      ) : (
+                        <KeyList keys={keys} />
+                      )
+                    }
                   </Card.Content>
                 </Card>
               </Grid.Column>
@@ -59,8 +59,6 @@ export default function UserHome() {
           </Grid.Row>
         </Grid.Column>
       </Grid>
-    
     </Container>
-
   )
 }

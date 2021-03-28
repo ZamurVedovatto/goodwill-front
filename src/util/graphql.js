@@ -32,6 +32,38 @@ export const LOGIN_USER = gql `
   }
 `
 
+
+export const FETCH_KEYS_QUERY = gql`
+  query getKeys($userId: String!){
+    getKeys(userId: $userId){
+      id
+      type
+      confirmed
+      active
+      createdAt
+      username
+      value
+    }
+  }
+`
+
+export const CREATE_KEY_MUTATION = gql`
+  mutation createKey($userId: ID!, $username: String!, $type: String!, $value: String!){
+    createKey(userId: $userId, username:$username, type:$type, value:$value) {
+      id
+      type
+      value
+      confirmed
+      active
+      userId
+      username
+      address {
+        code
+      }
+    }
+  }
+`
+
 export const FETCH_POSTS_QUERY = gql`
 {
   getPosts {
@@ -55,16 +87,27 @@ export const FETCH_POSTS_QUERY = gql`
 }
 `
 
-export const FETCH_KEYS_QUERY = gql`
-  query getUserKeys($userId: String!){
-    getUserKeys(userId: $userId){
+export const CREATE_POST_MUTATION = gql`
+  mutation createPost($body: String!) {
+    createPost(body: $body) {
       id
-      type
-      confirmed
-      active
+      body
       createdAt
       username
-      value
+      likes {
+        id
+        username
+        createdAt
+      }
+      likeCount
+      comments {
+        id
+        body
+        username
+        createdAt
+      }
+      commentCount
     }
   }
 `
+

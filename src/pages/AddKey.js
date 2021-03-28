@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import KeyForm from '../components/KeyForm'
-import { Container, Grid, Breadcrumb, Segment, Button, Icon, Card } from 'semantic-ui-react'
+import { Container, Grid, Breadcrumb, Segment, Card } from 'semantic-ui-react'
+import { AuthContext } from './../context/auth'
 
 export default function AddKey() {
+  const { context, user } = useContext(AuthContext)
+
   return (
     <Container className="container-wrapper">
       <Segment>
@@ -26,7 +29,7 @@ export default function AddKey() {
                 </Card.Description>
               </Card.Content>
               <Card.Content>
-                <KeyForm />
+                <KeyForm user={user} />
               </Card.Content>
             </Card>
           </Grid.Column>
