@@ -10,17 +10,19 @@ export default function UserHome() {
   const { context, user } = useContext(AuthContext)
 
   useEffect(() => {
-    getUserKeys();
+    refetch();
   }, []);
 
-  const [getUserKeys, { loading, data: { getKeys: keys } = {}}] = useLazyQuery(FETCH_KEYS_QUERY, {
+  const { loading, data: { getKeys: keys } = {}, refetch} = useQuery(FETCH_KEYS_QUERY, {
     update(proxy) {
+      console.log('entrou')
       context.setKeys(keys)
     },
     variables: {
       userId: user.id
     }
   })
+
 
   return (
     <Container className="container-wrapper">
@@ -49,7 +51,7 @@ export default function UserHome() {
                       (loading || !keys) ? (
                         <span>loading</span>
                       ) : (
-                        <KeyList keys={keys} user={user} />
+                        <KeyList keys={keys} user={user} refetch={refetch} />
                       )
                     }
                   </Card.Content>

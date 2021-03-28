@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { Icon, Button, Confirm } from 'semantic-ui-react'
-import { DELETE_KEY_MUTATION, FETCH_KEYS_QUERY } from './../util/graphql'
-import CustomPopup from './../util/CustomPopup'
+import { DELETE_KEY_MUTATION, FETCH_KEYS_QUERY } from './../../util/graphql'
+import CustomPopup from './../../util/CustomPopup'
+import { AuthContext } from './../../context/auth'
 
 export default function DeleteButton({ keyId, userId, callback }) {
+  const context = useContext(AuthContext)
   const [confirmOpen, setConfirmOpen] = useState(false)
 
   const [deleteKeyMutation] = useMutation(DELETE_KEY_MUTATION, {
@@ -14,14 +16,10 @@ export default function DeleteButton({ keyId, userId, callback }) {
         query: FETCH_KEYS_QUERY,
         variables: {
           userId
-        }
+        },
       })
-      // proxy.writeQuery({
-      //   query: FETCH_KEYS_QUERY,
-      //   data: {
-      //     getKeys: data.getKeys(userId)
-      //   }
-      // })
+      console.log(data, context)
+      context.setKeys(data)
       if(callback) callback()
     },
     variables: {
@@ -36,7 +34,7 @@ export default function DeleteButton({ keyId, userId, callback }) {
           as="div"
           color="red"
           floated="right"
-          basic
+          circular
           onClick={() => setConfirmOpen(true)}
           >
           <Icon name="trash" style={{ margin: 0 }} />

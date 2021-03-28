@@ -2,12 +2,7 @@ import React from 'react'
 import { Button, Item } from 'semantic-ui-react'
 import DeleteButton from './Key/DeleteButton'
 
-const KeyList = ({ keys, user }) => {
-
-  function deleteKeyCallback() {
-    props.history.push('/user')
-  }
-
+const KeyList = ({ keys, user, refetch }) => {
   return (
     <Item.Group relaxed divided>
       {
@@ -21,8 +16,7 @@ const KeyList = ({ keys, user }) => {
                 <Item.Header>{userKey.type} ({userKey.key})</Item.Header>
                 <Item.Description>{JSON.stringify(userKey)}</Item.Description>
                 <Item.Extra>
-                  {/* <DeleteButton keyId={userKey.id} userId={user.id} callback={deleteKeyCallback} /> */}
-                  <Button color='google plus' floated="right" circular icon='delete' />
+                  <DeleteButton keyId={userKey.id} userId={user.id} callback={refetch} />
                   <Button color='linkedin' floated="right" circular icon='edit' />
                 </Item.Extra>
               </Item.Content>

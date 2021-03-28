@@ -77,6 +77,7 @@ function AuthProvider(props) {
   }
 
   function setKeys(data) {
+    console.log(data)
     dispatch({
       type: 'SET_KEYS',
       payload: data
@@ -84,8 +85,6 @@ function AuthProvider(props) {
   }
 
   function addKey(data) {
-    let teste = [data, ...["lala", "lulul"]]
-    console.log(teste)
     console.log(data)
     dispatch({
       type: 'ADD_KEY',
