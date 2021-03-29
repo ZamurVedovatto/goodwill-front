@@ -1,16 +1,11 @@
 import React, { useContext } from 'react'
-import { Button, Form, Container, Grid } from 'semantic-ui-react'
+import { Button, Form, Container, Grid, Segment } from 'semantic-ui-react'
 import { useMutation, useQuery } from '@apollo/client'
 import { useForm } from './../../util/hooks'
 import { FETCH_POSTS_QUERY, CREATE_POST_MUTATION, FETCH_KEYS_QUERY } from './../../util/graphql'
 import SearchComponent from './SearchComponent'
 import { AuthContext } from './../../context/auth'
-
-const options = [
-  { key: 'm', text: 'Placa', value: 'plate' },
-  { key: 'f', text: 'Endereço', value: 'address' },
-  { key: 'o', text: 'Genérica', value: 'randon' },
-]
+import keyTypes from './../../util/consts/keyTypes';
 
 export default function PostForm() {
   const { user } = useContext(AuthContext)
@@ -44,52 +39,59 @@ export default function PostForm() {
 
   return (
     <Container className="container-wrapper">
-      {JSON.stringify(keys)}
-      <Grid>
-        <Grid.Row>
-          <Grid.Column width={16}>
-            <Form onSubmit={onSubmit}>
-              <h2>Send message</h2>
-              {
-                (!loading && keys) ? (
-                  <Form.Field>
-                    <SearchComponent keys={keys} />
-                  </Form.Field>
-                ) : (
-                  <span>loading</span>
-                )
-              }
+      <Segment style={{ maxWidth: "420px" }}>
+        <Form onSubmit={onSubmit}> 
+          <h2>Send message</h2>
+          <Form.Field>
+            <Form.Select
+              fluid
+              label='Tipo'
+              name="type"
+              options={keyTypes}
+              onChange={onChange}
+              value={values.type}
+              error={error ? true : false}
+              placeholder='Tipo'
+            />
+          </Form.Field>
+          {
+            (!loading && keys) ? (
               <Form.Field>
-              <Form.Select
-                fluid
-                label='Gender'
-                options={options}
-                placeholder='Gender'
-              />
+                <label>Buscar Chave</label>
+                <SearchComponent keys={keys} />
               </Form.Field>
-              <Form.Field>
-                <Form.Input
-                  placeholder="Hi World"
-                  name="body"
-                  onChange={onChange}
-                  value={values.body}
-                  error={error ? true : false}
-                />
-                <Button type="submit" color="teal">
-                  Submit
-                </Button>
-              </Form.Field>
-            </Form>
-            { error && (
-              <div className="ui error message" style={{ marginBottom: "2rem" }}>
-                <ul className="list">
-                  <li>{error.graphQLErrors[0].message}</li>
-                </ul>
-              </div>
-            )}
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+            ) : (
+              <span>loading</span>
+            )
+          }
+
+          <Form.Field>
+            <Form.TextArea
+              label="Mensagem"
+              placeholder="Escreva aqui sua mensagem"
+              name="body"
+              onChange={onChange}
+              value={values.body}
+              error={error ? true : false}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Button type="submit" color="teal">
+              Submit
+            </Button>
+          </Form.Field>
+        </Form>
+        { error && (
+          <div className="ui error message" style={{ marginBottom: "2rem" }}>
+            <ul className="list">
+              <li>{error.graphQLErrors[0].message}</li>
+            </ul>
+          </div>
+        )}
+      </Segment>
+
+      <pre>{JSON.stringify(keys, null, 2)}</pre>
+
     </Container>
   )
 }

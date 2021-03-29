@@ -52,10 +52,6 @@ export default function HomeContent({posts}) {
             </Segment>
           ) : (
             <>
-            <Segment>
-              This is an stretched grid column. This segment will always match the
-              tab height
-            </Segment>
               <Transition.Group>
                 {
                   posts && posts.map(post => (
@@ -65,7 +61,9 @@ export default function HomeContent({posts}) {
                   ))
                 }
               </Transition.Group>
-
+              <Segment>
+                We're done here.
+              </Segment>
             {/* <PostCard /> */}
             </>
           )

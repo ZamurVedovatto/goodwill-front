@@ -1,12 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 import { CREATE_KEY_MUTATION } from './../util/graphql'
 import { useHistory } from "react-router-dom";
-import { AuthContext } from './../context/auth'
+import keyTypes from './../util/consts/keyTypes';
 
 export default function KeyForm({ user }) {
-  const context = useContext(AuthContext)
   const history = useHistory();
   const [values, setValues] = useState({
     userId: user.id,
@@ -16,10 +15,13 @@ export default function KeyForm({ user }) {
   })
 
   const onChange = (event) => {
+    console.log(event)
     setValues({
       ...values,
       [event.target.name]: event.target.value
     })
+
+    console.log(values)
   }
 
   const [createKey, { error }] = useMutation(CREATE_KEY_MUTATION, {
@@ -33,28 +35,37 @@ export default function KeyForm({ user }) {
     },
   });
   function createKeyCallback() {
-    // setValues({
-    //   ...values,
-    //   userId: user.id,
-    //   username: user.username,
-    // }) 
-    console.log(context, user)
+    setValues({
+      ...values,
+      userId: user.id,
+      username: user.username,
+    }) 
     createKey()
+  }
+
+  const onChangeSelect = (e) => {
+    console.log(e.target.title)
+    setValues({
+      ...values,
+      type: e.target.title
+    }) 
   }
 
   return (
     <>
       <Form onSubmit={createKeyCallback}>
-        <h2>Create Key</h2>
         <Form.Field>
-          <Form.Input
-            placeholder="Plate"
+          <Form.Select
+            fluid
+            label='Tipo'
             name="type"
-            onChange={onChange}
-            value={values.type}
+            options={keyTypes}
+            onChange={(e) => onChangeSelect(e)}
             error={error ? true : false}
+            placeholder='Tipo'
           />
           <Form.Input
+            label='Valor'
             placeholder="jmi7489"
             name="title"
             onChange={onChange}
@@ -67,7 +78,7 @@ export default function KeyForm({ user }) {
         </Form.Field>
       </Form>
       { error && (
-        JSON.stringify(error)
+        <pre>{JSON.stringify(error, null, 2)}</pre>
         // <div className="ui error message" style={{ marginBottom: "2rem" }}>
         //   <ul className="list">
         //     <li>{error.graphQLErrors[0].message}</li>
