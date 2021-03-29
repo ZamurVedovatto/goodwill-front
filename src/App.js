@@ -18,6 +18,7 @@ import AddKey from './pages/AddKey'
 import logoImg from './assets/logo.svg'
 import CompanyProfile from './pages/CompanyProfile';
 import Test from './pages/Test';
+import PostForm from './components/Post/PostForm';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route exact path='/test' component={Test} />
         <Route exact path='/company' component={CompanyProfile} />
         <Route exact path='/' component={Home} />
+        <Route exact path="/message" component={PostForm} />
         <Route exact path='/user' component={UserHome} />
         <Route exact path='/user/addkey' component={AddKey} />
         <Route exact path='/settings' component={UserSettings} />

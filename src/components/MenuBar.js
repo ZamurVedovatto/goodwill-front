@@ -12,24 +12,39 @@ export default function MenuBar() {
   const path = pathname === '/' ? 'home' : pathname.substring(1)
   const [activeItem, setActiveItem] = useState(path)
   
-  const handleItemClick = (e, { name }) => setActiveItem(name)
+  const handleItemClick = (e, { name }) => {
+    console.log(name)
+    setActiveItem(name)
+  }
 
   const menuBar = user ? (
     <div className="content-wrapper">
       <div className="menu-content">
-        <Menu borderless color="teal" style={{ marginBottom: "0", border: "none", boxShadow: "none" }}>
+        <Menu borderless color="teal" style={{ marginBottom: "0", border: "none", boxShadow: "none", width: "100%", alignItems: "center" }}>
           <Menu.Menu>
             <Menu.Item
               icon="home"
-              active={activeItem === 'goodwill'}
+              name="home"
+              active={activeItem === 'home'}
+              onClick={handleItemClick}
               as={Link}
               to="/"
             />
             <Menu.Item
-              content="Companies"
+              icon="building"
+              name="company"
               active={activeItem === 'company'}
+              onClick={handleItemClick}
               as={Link}
               to="/company"
+            />
+            <Menu.Item
+              icon="send"
+              name="message"
+              active={activeItem === 'message'}
+              onClick={handleItemClick}
+              as={Link}
+              to="/message"
             />
           </Menu.Menu>
           <Menu.Menu style={{ margin: "0 auto"}}>
@@ -37,33 +52,33 @@ export default function MenuBar() {
               <SearchStandard />
             </Menu.Item>
           </Menu.Menu>
+          <Menu.Menu>
+            <Dropdown icon="user" text={user.username}>
+              <Dropdown.Menu direction="left">
+                {/* <Dropdown.Header>User Settings</Dropdown.Header> */}
+                <Dropdown.Item
+                  as={Link}
+                  to="/user"
+                >
+                  Keys & Actions
+                </Dropdown.Item>
+                <Dropdown.Item
+                  as={Link}
+                  to="/settings"
+                >
+                  Settings
+                </Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item
+                  name='logout'
+                  onClick={logout}
+                >
+                  Logout
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu.Menu>
         </Menu>
-        <Menu.Menu>
-          <Dropdown icon="user" text={user.username}>
-            <Dropdown.Menu direction="left">
-              {/* <Dropdown.Header>User Settings</Dropdown.Header> */}
-              <Dropdown.Item
-                as={Link}
-                to="/user"
-              >
-                Keys & Actions
-              </Dropdown.Item>
-              <Dropdown.Item
-                as={Link}
-                to="/settings"
-              >
-                Settings
-              </Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item
-                name='logout'
-                onClick={logout}
-              >
-                Logout
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Menu.Menu>
       </div>
     </div>
   ) : (

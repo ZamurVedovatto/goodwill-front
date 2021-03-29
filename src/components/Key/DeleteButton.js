@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { Icon, Button, Confirm } from 'semantic-ui-react'
-import { DELETE_KEY_MUTATION, FETCH_KEYS_QUERY } from './../../util/graphql'
+import { DELETE_KEY_MUTATION, FETCH_USER_KEYS_QUERY } from './../../util/graphql'
 import CustomPopup from './../../util/CustomPopup'
 import { AuthContext } from './../../context/auth'
 
@@ -13,7 +13,7 @@ export default function DeleteButton({ keyId, userId, callback }) {
     update(proxy) {
       setConfirmOpen(false)
       const data = proxy.readQuery({
-        query: FETCH_KEYS_QUERY,
+        query: FETCH_USER_KEYS_QUERY,
         variables: {
           userId
         },

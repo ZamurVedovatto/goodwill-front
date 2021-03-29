@@ -4,7 +4,7 @@ import { Grid, Icon, Card , Button, Container } from 'semantic-ui-react'
 import KeyList from './../components/KeyList'
 import { Link, useHistory } from 'react-router-dom'
 import { AuthContext } from './../context/auth'
-import { FETCH_KEYS_QUERY } from './../util/graphql'
+import { FETCH_USER_KEYS_QUERY } from './../util/graphql'
 
 export default function UserHome() {
   const history = useHistory();
@@ -14,7 +14,7 @@ export default function UserHome() {
     refetch();
   }, []);
 
-  const { loading, data: { getKeys: keys } = {}, refetch} = useQuery(FETCH_KEYS_QUERY, {
+  const { loading, data: { getUserKeys: keys } = {}, refetch} = useQuery(FETCH_USER_KEYS_QUERY, {
     update(proxy) {
       context.setKeys(keys)
     },
