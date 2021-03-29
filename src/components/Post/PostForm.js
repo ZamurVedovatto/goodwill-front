@@ -6,6 +6,12 @@ import { FETCH_POSTS_QUERY, CREATE_POST_MUTATION, FETCH_KEYS_QUERY } from './../
 import SearchComponent from './SearchComponent'
 import { AuthContext } from './../../context/auth'
 
+const options = [
+  { key: 'm', text: 'Placa', value: 'plate' },
+  { key: 'f', text: 'Endereço', value: 'address' },
+  { key: 'o', text: 'Genérica', value: 'randon' },
+]
+
 export default function PostForm() {
   const { user } = useContext(AuthContext)
   const { loading, data: { getKeys: keys } = {}} = useQuery(FETCH_KEYS_QUERY)
@@ -53,6 +59,14 @@ export default function PostForm() {
                   <span>loading</span>
                 )
               }
+              <Form.Field>
+              <Form.Select
+                fluid
+                label='Gender'
+                options={options}
+                placeholder='Gender'
+              />
+              </Form.Field>
               <Form.Field>
                 <Form.Input
                   placeholder="Hi World"

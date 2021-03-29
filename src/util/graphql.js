@@ -22,7 +22,7 @@ export const LOGIN_USER = gql `
         type
         confirmed
         active
-        value
+        title
         username
         address {
           code
@@ -42,7 +42,7 @@ export const FETCH_USER_KEYS_QUERY = gql`
       active
       createdAt
       username
-      value
+      title
     }
   }
 `
@@ -57,18 +57,18 @@ export const FETCH_KEYS_QUERY = gql`
       active
       createdAt
       username
-      value
+      title
     }
   }
 `
 
 
 export const CREATE_KEY_MUTATION = gql`
-  mutation createKey($userId: ID!, $username: String!, $type: String!, $value: String!){
-    createKey(userId: $userId, username:$username, type:$type, value:$value) {
+  mutation createKey($userId: ID!, $username: String!, $type: String!, $title: String!){
+    createKey(userId: $userId, username:$username, type:$type, title:$title) {
       id
       type
-      value
+      title
       confirmed
       active
       userId

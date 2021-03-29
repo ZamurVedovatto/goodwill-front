@@ -47,7 +47,7 @@ function SearchComponent({ keys }) {
       }
 
       const re = new RegExp(_.escapeRegExp(data.value), 'i')
-      const isMatch = (result) => re.test(result.type)
+      const isMatch = (result) => re.test(result.title)
 
       dispatch({
         type: 'FINISH_SEARCH',
@@ -63,8 +63,8 @@ function SearchComponent({ keys }) {
 
   return (
     <Grid>
-      <Grid.Column width={6}>
-        {JSON.stringify(results)}
+      <Grid.Column width={12}>
+        {/* {JSON.stringify(results)} */}
         <Search
           loading={loading}
           onResultSelect={(e, data) =>
@@ -77,7 +77,7 @@ function SearchComponent({ keys }) {
       </Grid.Column>
 
 
-      <Grid.Column width={10}>
+      {/* <Grid.Column width={10}>
         <Segment>
           <Header>State</Header>
           <pre style={{ overflowX: 'auto' }}>
@@ -88,7 +88,7 @@ function SearchComponent({ keys }) {
             {JSON.stringify(keys, null, 2)}
           </pre>
         </Segment>
-      </Grid.Column>
+      </Grid.Column> */}
     </Grid>
   )
 }

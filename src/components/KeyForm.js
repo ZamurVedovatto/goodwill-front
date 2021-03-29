@@ -12,7 +12,7 @@ export default function KeyForm({ user }) {
     userId: user.id,
     username: user.username,
     type: '',
-    value: '',
+    title: '',
   })
 
   const onChange = (event) => {
@@ -56,9 +56,9 @@ export default function KeyForm({ user }) {
           />
           <Form.Input
             placeholder="jmi7489"
-            name="value"
+            name="title"
             onChange={onChange}
-            value={values.value}
+            value={values.title}
             error={error ? true : false}
           />
           <Button type="submit" color="teal">
