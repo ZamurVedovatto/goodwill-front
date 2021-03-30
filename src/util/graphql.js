@@ -86,6 +86,24 @@ export const DELETE_KEY_MUTATION = gql`
   }
 `
 
+export const TOGGLE_ACTIVE_KEY_MUTATION = gql`
+  mutation toggleActiveKey($userId: ID!, $keyId: ID!){
+    toggleActiveKey(userId: $userId, keyId: $keyId){
+      id
+      type
+      title
+      confirmed
+      active
+      userId
+      username
+      address {
+        code
+      }
+    }
+  }
+`
+
+
 export const FETCH_POSTS_QUERY = gql`
 {
   getPosts {
@@ -129,6 +147,19 @@ export const CREATE_POST_MUTATION = gql`
         createdAt
       }
       commentCount
+    }
+  }
+`
+
+export const LIKE_POST_MUTATION = gql`
+  mutation likePost($postId: ID!){
+    likePost(postId: $postId){
+      id
+      likes{
+        id
+        username
+      }
+      likeCount
     }
   }
 `

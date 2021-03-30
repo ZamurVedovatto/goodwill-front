@@ -21,17 +21,13 @@ export default function AddKey() {
             </Breadcrumb>
           </Grid.Column>
           <Grid.Column width={16}>
-            <Card fluid>
-              <Card.Content>
-                <Card.Header>Add Key</Card.Header>
-                <Card.Description>
-                  It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                </Card.Description>
-              </Card.Content>
-              <Card.Content>
-                <KeyForm user={user} />
-              </Card.Content>
-            </Card>
+
+            <Card.Header>Add Key</Card.Header>
+            <Card.Description>
+              It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+            </Card.Description>
+            <KeyForm user={user} />
+
           </Grid.Column>
         </Grid>
       </Segment>

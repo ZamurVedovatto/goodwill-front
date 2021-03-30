@@ -24,24 +24,24 @@ export default function MenuBar() {
           <Menu.Menu>
             <Menu.Item
               icon="home"
-              name="home"
-              active={activeItem === 'home'}
+              name="Feed"
+              active={activeItem === 'Feed'}
               onClick={handleItemClick}
               as={Link}
               to="/"
             />
             <Menu.Item
               icon="building"
-              name="company"
-              active={activeItem === 'company'}
+              name="Serviços"
+              active={activeItem === 'Serviços'}
               onClick={handleItemClick}
               as={Link}
               to="/company"
             />
             <Menu.Item
               icon="send"
-              name="message"
-              active={activeItem === 'message'}
+              name="Enviar Mensagem"
+              active={activeItem === 'Enviar Mensagem'}
               onClick={handleItemClick}
               as={Link}
               to="/message"
@@ -93,15 +93,15 @@ export default function MenuBar() {
           />
           <Menu.Menu position="right">
             <Menu.Item
-              name='login'
-              active={activeItem === 'login'}
+              name='acessar'
+              active={activeItem === 'acessar'}
               onClick={handleItemClick}
               as={Link}
               to="/login"
             />
             <Menu.Item
-              name='register'
-              active={activeItem === 'register'}
+              name='Criar Conta'
+              active={activeItem === 'Criar Conta'}
               onClick={handleItemClick}
               as={Link}
               to="/register"

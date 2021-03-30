@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import uuid from 'react-uuid'
+
+import { Button, Form, Label, Select, Card, Placeholder } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 import { CREATE_KEY_MUTATION } from './../util/graphql'
 import { useHistory } from "react-router-dom";
 import keyTypes from './../util/consts/keyTypes';
+
+import FormKeyGeneric from './Key/FormKeyGeneric'
+import FormKeySimpleInput from './Key/FormKeySimpleInput'
+import FormKeyAddress from './Key/FormKeyAddress';
 
 export default function KeyForm({ user }) {
   const history = useHistory();
@@ -20,7 +26,6 @@ export default function KeyForm({ user }) {
       ...values,
       [event.target.name]: event.target.value
     })
-
     console.log(values)
   }
 
@@ -45,46 +50,59 @@ export default function KeyForm({ user }) {
 
   const onChangeSelect = (e) => {
     console.log(e.target.title)
+    let newTitle = (e.target.title === 'generic') ? uuid() : ''
+    console.log(newTitle)
     setValues({
       ...values,
-      type: e.target.title
-    }) 
+      type: e.target.title,
+      title: newTitle
+    })
   }
 
   return (
     <>
-      <Form onSubmit={createKeyCallback}>
-        <Form.Field>
-          <Form.Select
-            fluid
-            label='Tipo'
-            name="type"
-            options={keyTypes}
-            onChange={(e) => onChangeSelect(e)}
-            error={error ? true : false}
-            placeholder='Tipo'
-          />
-          <Form.Input
-            label='Valor'
-            placeholder="jmi7489"
-            name="title"
-            onChange={onChange}
-            value={values.title}
-            error={error ? true : false}
-          />
-          <Button type="submit" color="teal">
-            Submit
-          </Button>
-        </Form.Field>
-      </Form>
-      { error && (
-        <pre>{JSON.stringify(error, null, 2)}</pre>
-        // <div className="ui error message" style={{ marginBottom: "2rem" }}>
-        //   <ul className="list">
-        //     <li>{error.graphQLErrors[0].message}</li>
-        //   </ul>
-        // </div>
-      )}
+      <Card centered>
+        <Select
+          fluid
+          label='Tipo'
+          name="type"
+          options={keyTypes}
+          onChange={(e) => onChangeSelect(e)}
+          error={error ? true : false}
+          placeholder='Tipo'
+        />
+      </Card>
+      <Card centered>
+        <Card.Content>
+          {
+            (values.type === '') && 
+            <Placeholder>
+              <Placeholder.Header image>
+                <Placeholder.Line />
+                <Placeholder.Line />
+              </Placeholder.Header>
+              <Placeholder.Paragraph>
+                <Placeholder.Line />
+                <Placeholder.Line />
+                <Placeholder.Line />
+                <Placeholder.Line />
+              </Placeholder.Paragraph>
+            </Placeholder>
+          }
+          {
+            (values.type === 'generic') &&
+            <FormKeyGeneric values={values} onChange={onChange} error={error} createKeyCallback={createKeyCallback} />
+          }
+          {
+            (values.type === 'plate' || values.type === 'schoolId')  &&
+            <FormKeySimpleInput values={values} onChange={onChange} error={error} createKeyCallback={createKeyCallback} />
+          }
+          {
+            (values.type === 'address') &&
+            <FormKeyAddress values={values} onChange={onChange} error={error} createKeyCallback={createKeyCallback} />
+          }
+        </Card.Content>
+      </Card>
     </>
   )
 }
