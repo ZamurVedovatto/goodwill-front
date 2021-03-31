@@ -5,7 +5,7 @@ import { Menu, Dropdown, Modal } from 'semantic-ui-react'
 import { AuthContext } from './../context/auth'
 
 import SearchStandard from './../components/SearchStandard'
-import SendMessage from './General/SendMessage'
+import MessageSend from './General/MessageSend'
 
 export default function MenuBar() {
   const { user, logout } = useContext(AuthContext)
@@ -28,7 +28,7 @@ export default function MenuBar() {
         onOpen={() => setOpen(true)}
         closeOnEscape={false}
       >
-        <SendMessage open={open} setOpen={setOpen} />
+        <MessageSend setOpen={setOpen} />
       </Modal>
       <div className="menu-content">
         <Menu borderless color="teal" style={{ marginBottom: "0", border: "none", boxShadow: "none", width: "100%", alignItems: "center" }}>
