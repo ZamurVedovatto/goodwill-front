@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Icon, Modal } from 'semantic-ui-react'
-import MessageForm from './MessageForm'
+import MessageForm from './../Message/MessageForm'
 
 export default function MessageSend({ setOpen }) {
   return (

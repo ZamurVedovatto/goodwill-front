@@ -15,6 +15,7 @@ export default function MessageForm() {
   const { values, onChange, onSubmit } = useForm(createMessageCallback, {
     body: ''
   })
+  
   const [createMessage, { error }] = useMutation(CREATE_MESSAGE_MUTATION, {
     variables: values,
     update(proxy, result) {

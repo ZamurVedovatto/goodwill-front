@@ -13,6 +13,8 @@ export default function MessageForm() {
   const [broadcast, setBroadcast] = useState(false)
 
   const { values, onChange, onSubmit } = useForm(createMessageCallback, {
+    modality: 'single',
+    targetKey: '',
     body: ''
   })
   
@@ -28,6 +30,7 @@ export default function MessageForm() {
           getMessages: [result.data.createMessage, ...data.getMessages],
         },
       });
+      values.targetKey = '';
       values.body = "";
     },
     onError(err) {
@@ -35,12 +38,12 @@ export default function MessageForm() {
     },
   });
   function createMessageCallback() {
+    console.log(values)
     createMessage()
   }
 
   return (
     <Container className="container-wrapper">
-      
         <Form> 
           <Form.Field>
             Modalidade: <b>{broadcast ? 'Broadcast' : 'Direta'}</b>
@@ -49,7 +52,7 @@ export default function MessageForm() {
             <Radio
               label='Direta'
               name='radioGroup'
-              value={true}
+              value="true"
               checked={!broadcast}
               onChange={() => setBroadcast(false)}
             />
@@ -58,7 +61,7 @@ export default function MessageForm() {
             <Radio
               label='Broadcast'
               name='radioGroup'
-              value={false}
+              value="false"
               checked={broadcast}
               onChange={() => setBroadcast(true)}
             />
@@ -114,7 +117,7 @@ export default function MessageForm() {
                   (!loading && keys) ? (
                     <Form.Field>
                       <label>Buscar Chave</label>
-                      <SearchComponent keys={keys} />
+                      <SearchComponent setTargetKey={onChange} keys={keys} />
                     </Form.Field>
                   ) : (
                     <span>loading</span>
@@ -144,7 +147,7 @@ export default function MessageForm() {
         { error && (
           <div className="ui error message" style={{ marginBottom: "2rem" }}>
             <ul className="list">
-              <li>{error.graphQLErrors[0].message}</li>
+              <li>{error?.graphQLErrors[0]?.message}</li>
             </ul>
           </div>
         )}

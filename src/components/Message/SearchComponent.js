@@ -24,13 +24,14 @@ function exampleReducer(state, action) {
     case 'FINISH_SEARCH':
       return { ...state, loading: false, results: action.results }
     case 'UPDATE_SELECTION':
+      console.log(action)
       return { ...state, value: action.selection }
     default:
       throw new Error()
   }
 }
 
-function SearchComponent({ keys }) {
+function SearchComponent({ setTargetKey, keys }) {
   const [state, dispatch] = React.useReducer(exampleReducer, initialState)
   const { loading, results, value } = state
 
@@ -60,15 +61,27 @@ function SearchComponent({ keys }) {
     }
   }, [])
 
+  const onSetSelection = (value) => {
+    let event = {
+      target: {
+        name: "targetKey",
+        value
+      }
+    }
+    setTargetKey(event)
+    dispatch({ type: 'UPDATE_SELECTION', selection: value })
+  }
+
   return (
     <Grid>
       <Grid.Column width={12}>
         {/* {JSON.stringify(results)} */}
         <Search
           loading={loading}
-          onResultSelect={(e, data) =>
-            dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })
-          }
+          // onResultSelect={(e, data) =>
+          //   dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })
+          // }
+          onResultSelect={(e, data) => onSetSelection(data.result.title)}
           onSearchChange={handleSearchChange}
           results={results}
           value={value}
