@@ -15,14 +15,14 @@ const KeyList = ({ keys, user, refetch }) => {
 
 
   return (
-    <Grid stackable columns={4}>
+    <Grid stackable columns={3}>
       <Grid.Row stretched>
       {
         (keys?.length === 0) ? (
           <span>Nenhuma chave registrada.</span>
         ) : (
           keys?.map(userKey => (
-            <Grid.Column key={userKey.id}>
+            <Grid.Column key={userKey.id} style={{ marginBottom: "1.5rem" }}>
               <Card>
                 <Image
                   style={{ height: "0" }}

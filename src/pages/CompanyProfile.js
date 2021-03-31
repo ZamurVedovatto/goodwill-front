@@ -141,21 +141,16 @@ export default function CompanyProfile() {
                       <p>[  ] Sim</p>
                       <p>[  ] Não. <a href="">Desejo contactar empresa.</a></p>
                     </Segment>
-
-
-
-
-      
-                      <Segment style={{ display: "flex", flexDirection: "column", flexWrap: "wrap" }}>
-                        <Card.Header style={{ width: "100%", textAlign: "left", marginBottom: "1rem" }}>
-                          <h3>Controle de Notificações</h3>
-                        </Card.Header>
-                        <p>Receber notificações</p>
-                        <p>[ ] todas</p>
-                        <p>[ ] outra</p>
-                        <p>[ ] otura</p>
-                        <p>[ ] outar</p>
-                      </Segment>
+                    <Segment style={{ display: "flex", flexDirection: "column", flexWrap: "wrap" }}>
+                      <Card.Header style={{ width: "100%", textAlign: "left", marginBottom: "1rem" }}>
+                        <h3>Controle de Notificações</h3>
+                      </Card.Header>
+                      <p>Receber notificações</p>
+                      <p>[ ] todas</p>
+                      <p>[ ] outra</p>
+                      <p>[ ] otura</p>
+                      <p>[ ] outar</p>
+                    </Segment>
 
 
 

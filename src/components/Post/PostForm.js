@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Button, Form, Container, Grid, Segment } from 'semantic-ui-react'
+import { Button, Form, Container, Segment } from 'semantic-ui-react'
 import { useMutation, useQuery } from '@apollo/client'
 import { useForm } from './../../util/hooks'
 import { FETCH_POSTS_QUERY, CREATE_POST_MUTATION, FETCH_KEYS_QUERY } from './../../util/graphql'
@@ -89,9 +89,7 @@ export default function PostForm() {
           </div>
         )}
       </Segment>
-
-      <pre>{JSON.stringify(keys, null, 2)}</pre>
-
+      {/* <pre>{JSON.stringify(keys, null, 2)}</pre> */}
     </Container>
   )
 }

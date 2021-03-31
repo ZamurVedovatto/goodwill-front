@@ -26,13 +26,11 @@ export default function KeyForm({ user }) {
       ...values,
       [event.target.name]: event.target.value
     })
-    console.log(values)
   }
 
   const [createKey, { error }] = useMutation(CREATE_KEY_MUTATION, {
     variables: values,
     update(proxy, result) {
-      console.log(result)
       history.push("/user");
     },
     onError(err) {

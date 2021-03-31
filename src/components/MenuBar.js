@@ -1,17 +1,20 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { Menu, Dropdown } from 'semantic-ui-react'
+import { Menu, Dropdown, Modal } from 'semantic-ui-react'
 import { AuthContext } from './../context/auth'
 
 import SearchStandard from './../components/SearchStandard'
+import SendMessage from './General/SendMessage'
 
 export default function MenuBar() {
   const { user, logout } = useContext(AuthContext)
   const pathname = window.location.pathname
   const path = pathname === '/' ? 'home' : pathname.substring(1)
   const [activeItem, setActiveItem] = useState(path)
-  
+  const [open, setOpen] = React.useState(false)
+
+
   const handleItemClick = (e, { name }) => {
     console.log(name)
     setActiveItem(name)
@@ -19,6 +22,14 @@ export default function MenuBar() {
 
   const menuBar = user ? (
     <div className="content-wrapper">
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        onOpen={() => setOpen(true)}
+        closeOnEscape={false}
+      >
+        <SendMessage open={open} setOpen={setOpen} />
+      </Modal>
       <div className="menu-content">
         <Menu borderless color="teal" style={{ marginBottom: "0", border: "none", boxShadow: "none", width: "100%", alignItems: "center" }}>
           <Menu.Menu>
@@ -42,9 +53,7 @@ export default function MenuBar() {
               icon="send"
               name="Enviar Mensagem"
               active={activeItem === 'Enviar Mensagem'}
-              onClick={handleItemClick}
-              as={Link}
-              to="/message"
+              onClick={() => setOpen(true)}
             />
           </Menu.Menu>
           <Menu.Menu style={{ margin: "0 auto"}}>
