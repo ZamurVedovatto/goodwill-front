@@ -11,9 +11,6 @@ import CustomPopup from '../util/CustomPopup'
 export default function MessageCard({ message: { id, modality, targetKey, body, senderId, createdAt, comments, commentCount, likes, likeCount }}) {
   const { user } = useContext(AuthContext)
 
-
-  
-
   return (
     <Card fluid>
       <Card.Content>
@@ -23,8 +20,8 @@ export default function MessageCard({ message: { id, modality, targetKey, body, 
           src='https://picsum.photos/200'
           circular
         />
-        <Card.Header>{modality}</Card.Header>
-        <Card.Meta as={Link} to={`/messages/${id}`}>{moment(createdAt).fromNow(true)}</Card.Meta>
+        <Card.Header>{targetKey}</Card.Header>
+        <Card.Meta as={Link} to={`/messages/${id}`}>{modality} - {moment(createdAt).fromNow(true)}</Card.Meta>
         <Card.Description className="description-cutted">{body}</Card.Description>
       </Card.Content>
       <Card.Content extra>
