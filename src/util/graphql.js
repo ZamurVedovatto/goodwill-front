@@ -104,13 +104,15 @@ export const TOGGLE_ACTIVE_KEY_MUTATION = gql`
 `
 
 
-export const FETCH_POSTS_QUERY = gql`
+export const FETCH_MESSAGES_QUERY = gql`
 {
-  getPosts {
+  getMessages {
     id
+    modality
+    targetKey
     body
+    senderId
     createdAt
-    username
     likeCount
     likes {
       id
@@ -127,33 +129,47 @@ export const FETCH_POSTS_QUERY = gql`
 }
 `
 
-export const CREATE_POST_MUTATION = gql`
-  mutation createPost($body: String!) {
-    createPost(body: $body) {
+export const CREATE_MESSAGE_MUTATION = gql`
+  mutation createMessage($modality: String!, $targetKey: String!, $body: String!) {
+    createMessage(modality: $modality, targetKey: $targetKey, body: $body) {
       id
+      modality
+      targetKey
       body
+      senderId
       createdAt
-      username
-      likes {
-        id
-        username
-        createdAt
-      }
-      likeCount
-      comments {
-        id
-        body
-        username
-        createdAt
-      }
-      commentCount
     }
   }
 `
 
-export const LIKE_POST_MUTATION = gql`
-  mutation likePost($postId: ID!){
-    likePost(postId: $postId){
+export const FETCH_MESSAGE_QUERY = gql`
+  query($messageId: ID!) {
+    getMessage(messageId: $messageId) {
+      id
+      modality
+      targetKey
+      body
+      senderId
+      createdAt
+      likeCount
+      likes {
+        id
+        username
+      }
+      commentCount
+      comments {
+        id
+        username
+        createdAt
+        body
+      }
+    }
+  }
+`
+
+export const LIKE_MESSAGE_MUTATION = gql`
+  mutation likeMessage($messageId: ID!){
+    likeMessage(messageId: $messageId){
       id
       likes{
         id

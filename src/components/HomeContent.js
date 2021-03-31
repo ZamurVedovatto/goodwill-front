@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, Menu, Segment, Image, Transition } from 'semantic-ui-react'
-import PostCard from './PostCard'
+import MessageCard from './MessageCard'
 
-export default function HomeContent({posts}) {
+export default function HomeContent({messages}) {
   const [activeItem, setActiveItem] = useState('feed')
   const [loading, setLoading] = useState(true)
 
@@ -54,9 +54,9 @@ export default function HomeContent({posts}) {
             <>
               <Transition.Group>
                 {
-                  posts && posts.map(post => (
-                    <Grid.Column key={post.id} style={{ marginBottom: "2rem" }}>
-                      <PostCard post={post} />
+                  messages && messages.map(message => (
+                    <Grid.Column key={message.id} style={{ marginBottom: "2rem" }}>
+                      <MessageCard message={message} />
                     </Grid.Column>
                   ))
                 }
@@ -64,7 +64,7 @@ export default function HomeContent({posts}) {
               <Segment>
                 We're done here.
               </Segment>
-            {/* <PostCard /> */}
+            {/* <MessageCard /> */}
             </>
           )
         }

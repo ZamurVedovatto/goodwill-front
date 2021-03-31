@@ -13,7 +13,7 @@ import UserHome from './pages/UserHome'
 import UserSettings from './pages/UserSettings'
 import Register from './pages/Register'
 import Login from './pages/Login'
-import SinglePost from './pages/SinglePost'
+import SingleMessage from './pages/SingleMessage'
 import CompanyProfile from './pages/CompanyProfile';
 import MenuBar from './components/MenuBar'
 
@@ -28,7 +28,7 @@ function App() {
         <Route exact path='/settings' component={UserSettings} />
         <AuthRoute exact path='/login' component={Login} />
         <AuthRoute exact path='/register' component={Register} />
-        <Route exact path="/posts/:postId" component={SinglePost} />
+        <Route exact path="/messages/:messageId" component={SingleMessage} />
       </Router>
       <Image className="img-footer" src={logoImg} />
     </AuthProvider>

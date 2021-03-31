@@ -2,30 +2,30 @@ import React, { useContext, useState } from 'react'
 import { Button, Form, Container, Segment, Radio } from 'semantic-ui-react'
 import { useMutation, useQuery } from '@apollo/client'
 import { useForm } from './../../util/hooks'
-import { FETCH_POSTS_QUERY, CREATE_POST_MUTATION, FETCH_KEYS_QUERY } from './../../util/graphql'
+import { FETCH_MESSAGES_QUERY, CREATE_MESSAGE_MUTATION, FETCH_KEYS_QUERY } from './../../util/graphql'
 import SearchComponent from './SearchComponent'
 import { AuthContext } from './../../context/auth'
 import keyTypes from './../../util/consts/keyTypes';
 
-export default function PostForm() {
+export default function MessageForm() {
   const { user } = useContext(AuthContext)
   const { loading, data: { getKeys: keys } = {}} = useQuery(FETCH_KEYS_QUERY)
   const [broadcast, setBroadcast] = useState(false)
 
-  const { values, onChange, onSubmit } = useForm(createPostCallback, {
+  const { values, onChange, onSubmit } = useForm(createMessageCallback, {
     body: ''
   })
   
-  const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
+  const [createMessage, { error }] = useMutation(CREATE_MESSAGE_MUTATION, {
     variables: values,
     update(proxy, result) {
       const data = proxy.readQuery({
-        query: FETCH_POSTS_QUERY,
+        query: FETCH_MESSAGES_QUERY,
       });
       proxy.writeQuery({
-        query: FETCH_POSTS_QUERY,
+        query: FETCH_MESSAGES_QUERY,
         data: {
-          getPosts: [result.data.createPost, ...data.getPosts],
+          getMessages: [result.data.createMessage, ...data.getMessages],
         },
       });
       values.body = "";
@@ -34,8 +34,8 @@ export default function PostForm() {
       return err;
     },
   });
-  function createPostCallback() {
-    createPost()
+  function createMessageCallback() {
+    createMessage()
   }
 
   return (

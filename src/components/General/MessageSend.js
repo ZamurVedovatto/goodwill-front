@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Icon, Modal } from 'semantic-ui-react'
-import PostForm from './../Post/PostForm'
+import MessageForm from './MessageForm'
 
 export default function MessageSend({ setOpen }) {
   return (
@@ -15,7 +15,7 @@ export default function MessageSend({ setOpen }) {
           </p>
           <p>Antes de mais nada, defina se a mensagem será enviada para uma chave ou várias, ok?</p>
 
-          <PostForm />
+          <MessageForm />
 
         </Modal.Description>
         <Icon name='send' size='massive' flipped='vertically' color='teal'  />

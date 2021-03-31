@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
 
-const PostCardNew = () => (
+const MessageCardNew = () => (
   <Card>
     <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
     <Card.Content>
@@ -20,4 +20,4 @@ const PostCardNew = () => (
   </Card>
 )
 
-export default PostCardNew
+export default MessageCardNew

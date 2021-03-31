@@ -5,19 +5,21 @@ import { useMutation, useQuery } from "@apollo/client"
 import { Card, Grid, Image, Label, Button, Icon, Form, Container } from 'semantic-ui-react'
 import LikeButton from '../components/LikeButton'
 
+import { FETCH_MESSAGE_QUERY } from './../util/graphql'
+
 import { AuthContext } from './../context/auth'
 import DeleteButton from '../components/DeleteButton'
 import CustomPopup from '../util/CustomPopup'
 
-export default function SinglePost(props) {
+export default function SingleMessage(props) {
   const { user } = useContext(AuthContext)
   const commentInputRef = useRef(null)
-  const postId = props.match.params.postId
+  const messageId = props.match.params.messageId
   const [comment, setComment] = useState('')
 
-  const { data: { getPost } = {}} = useQuery(FETCH_POST_QUERY, {
+  const { data: { getMessage } = {}} = useQuery(FETCH_MESSAGE_QUERY, {
     variables: {
-      postId
+      messageId
     }
   })
 
@@ -27,21 +29,21 @@ export default function SinglePost(props) {
       commentInputRef.current.blur()
     },
     variables: {
-      postId,
+      messageId,
       body: comment
     }
   })
 
-  function deletePostCallback() {
+  function deleteMessageCallback() {
     props.history.push('/')
   }
 
-  let postMarkup
-  if(!getPost) {
-    postMarkup = <p>Loading post...</p>
+  let messageMarkup
+  if(!getMessage) {
+    messageMarkup = <p>Loading message...</p>
   } else {
-    const { id, body, createdAt, username, comments, likes, likeCount, commentCount } = getPost
-    postMarkup = (
+    const { id, body, createdAt, username, comments, likes, likeCount, commentCount } = getMessage
+    messageMarkup = (
       <Container className="container-wrapper">
         <Grid>
           <Grid.Row>
@@ -62,12 +64,12 @@ export default function SinglePost(props) {
                 </Card.Content>
                 <hr />
                 <Card.Content extra>
-                  <LikeButton user={user} post={{ id, likeCount, likes }} />
-                  <CustomPopup content="Comment on post">
+                  <LikeButton user={user} message={{ id, likeCount, likes }} />
+                  <CustomPopup content="Comment on message">
                     <Button
                       as="div"
                       labelPosition="right"
-                      onClick={() => console.log('comment on post')}
+                      onClick={() => console.log('comment on message')}
                     >
                       <Button basic color="blue">
                         <Icon name="comments" />
@@ -78,7 +80,7 @@ export default function SinglePost(props) {
                     </Button>
                   </CustomPopup>
                   { user && (user.username === username) && (
-                    <DeleteButton postId={id} callback={deletePostCallback} />
+                    <DeleteButton messageId={id} callback={deleteMessageCallback} />
                   )}
                 </Card.Content>
               </Card>
@@ -113,7 +115,7 @@ export default function SinglePost(props) {
                 <Card fluid key={comment.id}>
                   <Card.Content>
                     { user && user.username === comment.username && (
-                      <DeleteButton postId={id} commentId={comment.id} />
+                      <DeleteButton messageId={id} commentId={comment.id} />
                     )}
                     <Card.Header>{comment.username}</Card.Header>
                     <Card.Meta>{moment(comment.createdAt).fromNow()}</Card.Meta>
@@ -130,12 +132,12 @@ export default function SinglePost(props) {
     )
   }
 
-  return postMarkup
+  return messageMarkup
 }
 
 const SUBMIT_COMMENT_MUTATION = gql`
-  mutation($postId: String!, $body: String!){
-    createComment(postId: $postId, body: $body) {
+  mutation($messageId: String!, $body: String!){
+    createComment(messageId: $messageId, body: $body) {
       id
       comments{
         id
@@ -144,28 +146,6 @@ const SUBMIT_COMMENT_MUTATION = gql`
         username
       }
       commentCount
-    }
-  }
-`
-
-const FETCH_POST_QUERY = gql`
-  query($postId: ID!) {
-    getPost(postId: $postId) {
-      id
-      body
-      createdAt
-      username
-      likeCount
-      likes {
-        username
-      }
-      commentCount
-      comments {
-        id
-        username
-        createdAt
-        body
-      }
     }
   }
 `

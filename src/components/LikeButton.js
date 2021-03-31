@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import { Button, Icon, Label } from 'semantic-ui-react'
 import CustomPopup from '../util/CustomPopup'
-import { LIKE_POST_MUTATION } from './../util/graphql'
+import { LIKE_MESSAGE_MUTATION } from './../util/graphql'
 
-export default function LikeButton({ post: { id, likes, likeCount }, user}) {
+export default function LikeButton({ message: { id, likes, likeCount }, user}) {
   const [liked, setLiked] = useState(false)
 
   useEffect(() => {
@@ -16,8 +16,8 @@ export default function LikeButton({ post: { id, likes, likeCount }, user}) {
     }
   }, [user, likes])
 
-  const [likePost] = useMutation(LIKE_POST_MUTATION, {
-    variables: { postId: id}
+  const [likeMessage] = useMutation(LIKE_MESSAGE_MUTATION, {
+    variables: { messageId: id}
   })
 
   const likeButton = user ? (
@@ -37,7 +37,7 @@ export default function LikeButton({ post: { id, likes, likeCount }, user}) {
   )
 
   return (
-    <Button as='div' labelPosition='right' onClick={likePost}>
+    <Button as='div' labelPosition='right' onClick={likeMessage}>
       <CustomPopup content={liked ? 'Unlike' : 'Like'}>
         {likeButton}
       </CustomPopup>

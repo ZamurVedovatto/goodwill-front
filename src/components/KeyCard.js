@@ -31,7 +31,7 @@ export default function KeyCard({ keyItem: { id, type, confirmed, active, create
           active ? <Icon name='stop circle' color="blue" /> : <Icon name='stop circle' />
         }
         {
-          user && (user.username === username) && <DeleteButton postId={id} /> 
+          user && (user.username === username) && <DeleteButton messageId={id} /> 
         }
       </Card.Content>
     </Card>

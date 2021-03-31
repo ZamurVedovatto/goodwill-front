@@ -2,39 +2,39 @@ import React, { useState } from 'react'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/client'
 import { Icon, Button, Confirm } from 'semantic-ui-react'
-import { FETCH_POSTS_QUERY } from './../util/graphql'
+import { FETCH_MESSAGES_QUERY } from './../util/graphql'
 import CustomPopup from './../util/CustomPopup'
 
-export default function DeleteButton({ postId, commentId, callback }) {
+export default function DeleteButton({ messageId, commentId, callback }) {
   const [confirmOpen, setConfirmOpen] = useState(false)
 
-  const mutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_POST_MUTATION
+  const mutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_MESSAGE_MUTATION
 
-  const [deletePostOrMutation] = useMutation(mutation, {
+  const [deleteMessageOrMutation] = useMutation(mutation, {
     update(proxy) {
       setConfirmOpen(false)
       if(!commentId) {
         const data = proxy.readQuery({
-          query: FETCH_POSTS_QUERY
+          query: FETCH_MESSAGES_QUERY
         })
         proxy.writeQuery({
-          query:FETCH_POSTS_QUERY,
+          query:FETCH_MESSAGES_QUERY,
           data: {
-            getPosts: data.getPosts.filter(post => post.id !== postId)
+            getMessages: data.getMessages.filter(message => message.id !== messageId)
           }
         })
       }
       if(callback) callback()
     },
     variables: {
-      postId,
+      messageId,
       commentId
     }
   })
 
   return (
     <>
-      <CustomPopup content={commentId ? 'Delete comment' : 'Delete post'}>
+      <CustomPopup content={commentId ? 'Delete comment' : 'Delete message'}>
         <Button
           as="div"
           color="red"
@@ -49,21 +49,21 @@ export default function DeleteButton({ postId, commentId, callback }) {
       <Confirm
         open={confirmOpen}
         onCancel={() => setConfirmOpen(false)}
-        onConfirm={deletePostOrMutation}
+        onConfirm={deleteMessageOrMutation}
       />
     </>
   )
 }
 
-const DELETE_POST_MUTATION = gql`
-  mutation deletePost($postId: ID!) {
-    deletePost(postId: $postId)
+const DELETE_MESSAGE_MUTATION = gql`
+  mutation deleteMessage($messageId: ID!) {
+    deleteMessage(messageId: $messageId)
   }
 `
 
 const DELETE_COMMENT_MUTATION = gql`
-  mutation deleteComment($postId: ID!, $commentId: ID!) {
-    deleteComment(postId: $postId, commentId: $commentId ) {
+  mutation deleteComment($messageId: ID!, $commentId: ID!) {
+    deleteComment(messageId: $messageId, commentId: $commentId ) {
       id
       comments {
         id

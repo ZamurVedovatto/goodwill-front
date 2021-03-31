@@ -8,8 +8,11 @@ import LikeButton from './../components/LikeButton'
 import DeleteButton from './../components/DeleteButton'
 import CustomPopup from '../util/CustomPopup'
 
-export default function PostCard({ post: { body, createdAt, id, username, likeCount, commentCount, likes, comments }}) {
+export default function MessageCard({ message: { id, modality, targetKey, body, senderId, createdAt, comments, commentCount, likes, likeCount }}) {
   const { user } = useContext(AuthContext)
+
+
+  
 
   return (
     <Card fluid>
@@ -20,14 +23,14 @@ export default function PostCard({ post: { body, createdAt, id, username, likeCo
           src='https://picsum.photos/200'
           circular
         />
-        <Card.Header>{username}</Card.Header>
-        <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow(true)}</Card.Meta>
+        <Card.Header>{modality}</Card.Header>
+        <Card.Meta as={Link} to={`/messages/${id}`}>{moment(createdAt).fromNow(true)}</Card.Meta>
         <Card.Description className="description-cutted">{body}</Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <LikeButton post={{ id, likes, likeCount }} user={user} />
-        <CustomPopup content='Comment on post'>
-          <Button labelPosition='right' as={Link} to={`/posts/${id}`}>
+        <LikeButton message={{ id, likes, likeCount }} user={user} />
+        <CustomPopup content='Comment on message'>
+          <Button labelPosition='right' as={Link} to={`/messages/${id}`}>
             <Button color='blue' basic>
               <Icon name='comments' />
             </Button>
@@ -35,7 +38,7 @@ export default function PostCard({ post: { body, createdAt, id, username, likeCo
           </Button>
         </CustomPopup>
         {
-          user && (user.username === username) && <DeleteButton postId={id} /> 
+          user && (user.id === senderId) && <DeleteButton messageId={id} /> 
         }
       </Card.Content>
     </Card>

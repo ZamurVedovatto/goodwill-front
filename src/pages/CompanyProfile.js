@@ -90,7 +90,7 @@ export default function CompanyProfile() {
                       <Button
                         as="div"
                         labelPosition="right"
-                        onClick={() => console.log('comment on post')}
+                        onClick={() => console.log('comment on message')}
                       >
                         <Button basic color="blue">
                           <Icon name="comments" />
@@ -226,7 +226,7 @@ export default function CompanyProfile() {
                       <Button
                         as="div"
                         labelPosition="right"
-                        onClick={() => console.log('comment on post')}
+                        onClick={() => console.log('comment on message')}
                       >
                         <Button basic color="blue">
                           <Icon name="comments" />
@@ -291,7 +291,7 @@ export default function CompanyProfile() {
                       <Button
                         as="div"
                         labelPosition="right"
-                        onClick={() => console.log('comment on post')}
+                        onClick={() => console.log('comment on message')}
                       >
                         <Button basic color="blue">
                           <Icon name="comments" />
@@ -365,7 +365,7 @@ export default function CompanyProfile() {
                       <Button
                         as="div"
                         labelPosition="right"
-                        onClick={() => console.log('comment on post')}
+                        onClick={() => console.log('comment on message')}
                       >
                         <Button basic color="blue">
                           <Icon name="comments" />
@@ -433,7 +433,7 @@ export default function CompanyProfile() {
                       <Button
                         as="div"
                         labelPosition="right"
-                        onClick={() => console.log('comment on post')}
+                        onClick={() => console.log('comment on message')}
                       >
                         <Button basic color="blue">
                           <Icon name="comments" />
@@ -521,7 +521,7 @@ export default function CompanyProfile() {
                       <Button
                         as="div"
                         labelPosition="right"
-                        onClick={() => console.log('comment on post')}
+                        onClick={() => console.log('comment on message')}
                       >
                         <Button basic color="blue">
                           <Icon name="comments" />
