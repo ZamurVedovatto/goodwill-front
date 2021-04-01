@@ -24,7 +24,7 @@ export default function UserHome() {
   }
 
   useEffect(() => {
-    refetch();
+    if(user) refetch();
   }, []);
 
   const { loading, data: { getUserKeys: keys } = {}, refetch} = useQuery(FETCH_USER_KEYS_QUERY, {
@@ -32,7 +32,7 @@ export default function UserHome() {
       context.setKeys(keys)
     },
     variables: {
-      userId: user.id
+      userId: user?.id
     }
   })
 
