@@ -140,6 +140,8 @@ query getUserMessages($userId: ID!) {
     body
     senderId
     senderKey
+    read
+    received
     createdAt
     likeCount
     likes {
@@ -182,6 +184,8 @@ export const FETCH_MESSAGE_QUERY = gql`
       body
       senderId
       senderKey
+      read
+      received
       createdAt
       likeCount
       likes {
@@ -208,6 +212,15 @@ export const LIKE_MESSAGE_MUTATION = gql`
         username
       }
       likeCount
+    }
+  }
+`
+
+export const READ_MESSAGE_MUTATION = gql`
+  mutation readMessage($messageId: ID!){
+    readMessage(messageId: $messageId){
+      id
+      read
     }
   }
 `

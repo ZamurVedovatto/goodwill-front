@@ -8,9 +8,15 @@ import LikeButton from './../../components/LikeButton'
 import DeleteButton from './../../components/DeleteButton'
 import CustomPopup from './../../util/CustomPopup'
 
-export default function MessageUserCard({ message: { id, modality, targetKey, body, senderId, senderKey, createdAt, comments, commentCount, likes, likeCount }}) {
+import { useMutation } from '@apollo/client'
+import { READ_MESSAGE_MUTATION } from './../../util/graphql'
+
+export default function MessageUserCard({ message: { id, modality, targetKey, body, senderId, senderKey, read, received, createdAt, comments, commentCount, likes, likeCount }}) {
   const { user } = useContext(AuthContext)
-  const [read, setRead] = useState(false)
+
+  const [readMessage] = useMutation(READ_MESSAGE_MUTATION, {
+    variables: { messageId: id}
+  })
 
   return (
     <Card fluid >
@@ -21,7 +27,7 @@ export default function MessageUserCard({ message: { id, modality, targetKey, bo
               Lida
             </Label>
             :
-            <Label size={"large"} basic as='a' color='grey' ribbon='right' onClick={() => setRead(true)}>
+            <Label size={"large"} basic as='a' color='grey' ribbon='right' onClick={() => readMessage(id)}>
               Marcar como lida
             </Label>
         }
@@ -42,12 +48,12 @@ export default function MessageUserCard({ message: { id, modality, targetKey, bo
             <Label basic color='blue' pointing='left'>{commentCount}</Label>
           </Button>
         </CustomPopup>
-        <Button color="blue" animated floated="right">
+        <Button inverted color="violet" animated floated="right" style={{ minWidth: "125px" }}>
           <Button.Content visible>
             {senderKey}
           </Button.Content>
           <Button.Content hidden>
-            Favoritar
+            Favoritar Chave
           </Button.Content>
         </Button>
       </Card.Content>
