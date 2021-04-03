@@ -8,21 +8,16 @@ import LikeButton from './../../components/LikeButton'
 import DeleteButton from './../../components/DeleteButton'
 import CustomPopup from './../../util/CustomPopup'
 
-export default function MessageUserCard({ message: { id, modality, targetKey, body, senderId, createdAt, comments, commentCount, likes, likeCount }}) {
+export default function MessageUserCard({ message: { id, modality, targetKey, body, senderId, senderKey, createdAt, comments, commentCount, likes, likeCount }}) {
   const { user } = useContext(AuthContext)
 
   return (
     <Card fluid>
       <Card.Content>
-        <Image
-          floated='right'
-          size='mini'
-          src='https://picsum.photos/200'
-          circular
-        />
         <Card.Header>{body}</Card.Header>
         <Card.Meta as={Link} to={`/messages/${id}`}>{modality} - {moment(createdAt).fromNow(true)}</Card.Meta>
-        <Card.Description className="description-cutted">{targetKey}</Card.Description>
+        <Card.Description className="description-cutted">de: {senderKey}</Card.Description>
+        <Card.Description className="description-cutted">para: {targetKey}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <LikeButton message={{ id, likes, likeCount }} user={user} />

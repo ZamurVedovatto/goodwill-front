@@ -4,7 +4,7 @@ import { Grid, Icon, Transition, Button, Container, Menu, Segment, Image, Modal 
 import { AuthContext } from './../../context/auth'
 import { FETCH_USER_MESSAGES_QUERY } from './../../util/graphql'
 import AddKey from './../../components/Key/AddKey'
-import MessageCard from './MessageCard'
+import MessageUserCard from './MessageUserCard'
 import MessageSend from '../General/MessageSend'
 
 export default function MessageHome() {
@@ -13,7 +13,6 @@ export default function MessageHome() {
   const [open, setOpen] = React.useState(false)
 
   useEffect(() => {
-    console.log(user)
   }, [activeItem])
 
   const handleItemClick = (e, { name }) => {
@@ -61,7 +60,7 @@ export default function MessageHome() {
           onOpen={() => setOpen(true)}
           closeOnEscape={false}
         >
-          <MessageSend setOpen={setOpen} />
+          <MessageSend setOpen={setOpen} refetch={refetch} />
         </Modal>
         {
           (activeItem === 'Adicionar Chave') && <AddKey />
@@ -83,8 +82,11 @@ export default function MessageHome() {
                   <Transition.Group>
                     {
                       user && messages && messages.map(message => (
-                        <Grid.Column key={message.id} style={{ marginBottom: "2rem" }}>
-                          <MessageCard message={message} />
+                        <Grid.Column key={message.id} style={{ marginBottom: "1rem" }}>
+                          <pre>
+                            {JSON.stringify(message, null, 2)}
+                          </pre>
+                          <MessageUserCard message={message} />
                         </Grid.Column>
                       ))
                     }

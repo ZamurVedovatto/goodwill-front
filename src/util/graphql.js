@@ -112,6 +112,7 @@ export const FETCH_MESSAGES_QUERY = gql`
     targetKey
     body
     senderId
+    senderKey
     createdAt
     likeCount
     likes {
@@ -138,6 +139,7 @@ query getUserMessages($userId: ID!) {
     targetKey
     body
     senderId
+    senderKey
     createdAt
     likeCount
     likes {
@@ -158,12 +160,13 @@ query getUserMessages($userId: ID!) {
 
 
 export const CREATE_MESSAGE_MUTATION = gql`
-  mutation createMessage($modality: String!, $targetKey: String!, $body: String!) {
-    createMessage(modality: $modality, targetKey: $targetKey, body: $body) {
+  mutation createMessage($modality: String!, $targetKey: String!, $body: String!, $senderKey: String!) {
+    createMessage(modality: $modality, targetKey: $targetKey, body: $body, senderKey: $senderKey) {
       id
       modality
       targetKey
       body
+      senderKey
       senderId
       createdAt
     }
@@ -178,6 +181,7 @@ export const FETCH_MESSAGE_QUERY = gql`
       targetKey
       body
       senderId
+      senderKey
       createdAt
       likeCount
       likes {

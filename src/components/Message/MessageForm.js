@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Button, Form, Container, Segment, Radio } from 'semantic-ui-react'
 import { useMutation, useQuery } from '@apollo/client'
 import { useForm } from './../../util/hooks'
@@ -7,15 +7,31 @@ import SearchComponent from './SearchComponent'
 import { AuthContext } from './../../context/auth'
 import keyTypes from './../../util/consts/keyTypes';
 
-export default function MessageForm() {
-  const { user } = useContext(AuthContext)
+export default function MessageForm({refetch}) {
+  const { keys: userKeys } = useContext(AuthContext)
   const { loading, data: { getKeys: keys } = {}} = useQuery(FETCH_KEYS_QUERY)
   const [broadcast, setBroadcast] = useState(false)
+  const [userKeysOptions, setUserKeysOptions] = useState([])
+
+  useEffect(() => {
+    let newArr = []
+    userKeys.forEach(userKey => {
+      let newKey = {
+        key: userKey.id,
+        text: userKey.title,
+        value: userKey.title,
+      }
+      newArr.push(newKey)
+    })
+    setUserKeysOptions(newArr);
+
+  }, [userKeys])
 
   const { values, onChange, onSubmit } = useForm(createMessageCallback, {
     modality: 'single',
     targetKey: '',
-    body: ''
+    body: '',
+    senderKey: '',
   })
   
   const [createMessage, { error }] = useMutation(CREATE_MESSAGE_MUTATION, {
@@ -32,14 +48,28 @@ export default function MessageForm() {
       });
       values.targetKey = '';
       values.body = "";
+      values.sendertKey = '';
     },
     onError(err) {
       return err;
     },
   });
+
   function createMessageCallback() {
     console.log(values)
     createMessage()
+    refetch()
+  }
+
+  const onSetSelection = (e) => {
+    console.log(e)
+    let event = {
+      target: {
+        name: "senderKey",
+        value: e.target.textContent
+      }
+    }
+    onChange(event)
   }
 
   return (
@@ -113,6 +143,18 @@ export default function MessageForm() {
           ) : (
             <Segment>
               <Form onSubmit={onSubmit}>
+                <Form.Field>
+                  <Form.Select
+                    fluid
+                    label='Escolher sua Chave'
+                    name="senderKey"
+                    options={userKeysOptions}
+                    onChange={(e) => onSetSelection(e)}
+                    value={values.senderKey}
+                    error={error ? true : false}
+                    placeholder='Chave'
+                  />
+                </Form.Field>
                 {
                   (!loading && keys) ? (
                     <Form.Field>
