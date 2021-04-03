@@ -25,7 +25,7 @@ export default function MessageForm({refetch}) {
     })
     setUserKeysOptions(newArr);
 
-  }, [userKeys])
+  }, [keys])
 
   const { values, onChange, onSubmit } = useForm(createMessageCallback, {
     modality: 'single',
