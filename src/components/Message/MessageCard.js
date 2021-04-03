@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 import { Card, Icon, Label, Image, Button, Popup } from 'semantic-ui-react'
 import moment from 'moment'
 
-import { AuthContext } from './../context/auth'
-import LikeButton from './../components/LikeButton'
-import DeleteButton from './../components/DeleteButton'
-import CustomPopup from '../util/CustomPopup'
+import { AuthContext } from './../../context/auth'
+import LikeButton from './../../components/LikeButton'
+import DeleteButton from './../../components/DeleteButton'
+import CustomPopup from './../../util/CustomPopup'
 
 export default function MessageCard({ message: { id, modality, targetKey, body, senderId, createdAt, comments, commentCount, likes, likeCount }}) {
   const { user } = useContext(AuthContext)
@@ -20,9 +20,9 @@ export default function MessageCard({ message: { id, modality, targetKey, body, 
           src='https://picsum.photos/200'
           circular
         />
-        <Card.Header>{targetKey}</Card.Header>
+        <Card.Header>{body}</Card.Header>
         <Card.Meta as={Link} to={`/messages/${id}`}>{modality} - {moment(createdAt).fromNow(true)}</Card.Meta>
-        <Card.Description className="description-cutted">{body}</Card.Description>
+        <Card.Description className="description-cutted">{targetKey}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <LikeButton message={{ id, likes, likeCount }} user={user} />

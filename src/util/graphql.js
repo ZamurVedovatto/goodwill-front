@@ -129,6 +129,34 @@ export const FETCH_MESSAGES_QUERY = gql`
 }
 `
 
+
+export const FETCH_USER_MESSAGES_QUERY = gql`
+query getUserMessages($userId: ID!) {
+  getUserMessages(userId: $userId) {
+    id
+    modality
+    targetKey
+    body
+    senderId
+    createdAt
+    likeCount
+    likes {
+      id
+      username
+    }
+    commentCount
+    comments {
+      id
+      username
+      createdAt
+      body
+    }
+  }
+}
+`
+
+
+
 export const CREATE_MESSAGE_MUTATION = gql`
   mutation createMessage($modality: String!, $targetKey: String!, $body: String!) {
     createMessage(modality: $modality, targetKey: $targetKey, body: $body) {

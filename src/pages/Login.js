@@ -54,7 +54,7 @@ export default function Login(props) {
               onChange={onChange}
             />
             <Button type="submit" primary>
-              Login
+              Sign in
             </Button>
           </Form>
           {
@@ -75,7 +75,7 @@ export default function Login(props) {
 
         </Grid.Column>
         <Grid.Column verticalAlign='middle'>
-          <Button content='Acessar' icon='signup' size='big' as={Link} to="/register" />
+          <Button content='Sign up' icon='signup' size='big' as={Link} to="/register" />
         </Grid.Column>
       </Grid>
 

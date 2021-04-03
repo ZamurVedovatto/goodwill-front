@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, Menu, Segment, Image, Transition } from 'semantic-ui-react'
-import MessageCard from './MessageCard'
+import MessageCard from './Message/MessageCard'
 
 export default function HomeContent({messages}) {
   const [activeItem, setActiveItem] = useState('feed')

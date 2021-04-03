@@ -16,6 +16,7 @@ import Login from './pages/Login'
 import SingleMessage from './pages/SingleMessage'
 import CompanyProfile from './pages/CompanyProfile';
 import MenuBar from './components/MenuBar'
+import MessageHome from './components/Message/MessageHome';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <MenuBar />
         <Route exact path='/company' component={CompanyProfile} />
         <Route exact path='/' component={Home} />
+        <Route exact path='/messages' component={MessageHome} />
         <Route exact path='/user' component={UserHome} />
         <Route exact path='/settings' component={UserSettings} />
         <AuthRoute exact path='/login' component={Login} />
@@ -36,3 +38,4 @@ function App() {
 }
 
 export default App;
+
