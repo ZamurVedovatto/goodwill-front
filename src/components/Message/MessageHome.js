@@ -52,6 +52,11 @@ export default function MessageHome() {
               active={activeItem === 'Enviadas'}
               onClick={handleItemClick}
             />
+            <Menu.Item
+              name='Chaves Favoritas'
+              active={activeItem === 'Chaves Favoritas'}
+              onClick={handleItemClick}
+            />
           </Menu>
         </Grid.Column>
         <Modal
@@ -65,7 +70,7 @@ export default function MessageHome() {
         {
           (activeItem === 'Adicionar Chave') && <AddKey />
         }
-          {
+        {
           (activeItem === 'Enviadas') &&
           <span>Enviadas</span>
         }
@@ -83,9 +88,9 @@ export default function MessageHome() {
                     {
                       user && messages && messages.map(message => (
                         <Grid.Column key={message.id} style={{ marginBottom: "1rem" }}>
-                          <pre>
+                          {/* <pre>
                             {JSON.stringify(message, null, 2)}
-                          </pre>
+                          </pre> */}
                           <MessageUserCard message={message} />
                         </Grid.Column>
                       ))
@@ -98,6 +103,10 @@ export default function MessageHome() {
               )
             }
           </Grid.Column>
+        }
+        {
+          (activeItem === 'Chaves Favoritas') &&
+          <span>Chaves Favoritas</span>
         }
       </Grid>
     </Container>
