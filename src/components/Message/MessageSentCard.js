@@ -11,9 +11,9 @@ import CustomPopup from './../../util/CustomPopup'
 import { useMutation } from '@apollo/client'
 import { READ_MESSAGE_MUTATION } from './../../util/graphql'
 
-export default function MessageUserCard({ message: { id, modality, targetKey, body, senderId, senderKey, read, received, createdAt, comments, commentCount, likes, likeCount }}) {
+export default function MessageSentCard({ message: { id, modality, targetKey, body, senderId, senderKey, read, received, createdAt, comments, commentCount, likes, likeCount }}) {
   const { user } = useContext(AuthContext)
-
+  const [favorited, setFavorited] = useState(false)
   const [readMessage] = useMutation(READ_MESSAGE_MUTATION, {
     variables: { messageId: id}
   })
@@ -22,21 +22,29 @@ export default function MessageUserCard({ message: { id, modality, targetKey, bo
     <Card fluid >
       <Card.Content >
         {
-          read ?
+          received ?
             <Label size={"large"} basic color='blue' ribbon='right'>
-              Lida
+              Recebida
             </Label>
             :
-            <Label size={"large"} basic as='a' color='grey' ribbon='right' onClick={() => readMessage(id)}>
-              Marcar como lida
+            <Label size={"large"} basic as='a' color='grey' ribbon='right'>
+              Não recebida ainda
             </Label>
         }
         <Card.Header>
-          {body}
+          ({read ? "Lida" : "Não lida"}) {body}
         </Card.Header>
-        <Card.Meta as={Link} to={`/messages/${id}`}>{modality} - {moment(createdAt).fromNow(true)}</Card.Meta>
-        <Card.Description className="description-cutted">de: {senderKey}</Card.Description>
-        <Card.Description className="description-cutted">para: {targetKey}</Card.Description>
+        <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
+        <Card.Description className="description-cutted">
+          {
+            favorited ? 
+              <Icon color="yellow" link name='star' />
+              :
+              <Icon color="grey" link name='star' onClick={() => setFavorited(true)} />
+          }
+          {senderKey}
+        </Card.Description>
+        <Card.Description className="description-cutted">{targetKey}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <LikeButton message={{ id, likes, likeCount }} user={user} />
@@ -48,14 +56,6 @@ export default function MessageUserCard({ message: { id, modality, targetKey, bo
             <Label basic color='blue' pointing='left'>{commentCount}</Label>
           </Button>
         </CustomPopup>
-        <Button inverted color="violet" animated floated="right" style={{ minWidth: "125px" }}>
-          <Button.Content visible>
-            {senderKey}
-          </Button.Content>
-          <Button.Content hidden>
-            Favoritar Chave
-          </Button.Content>
-        </Button>
       </Card.Content>
     </Card>
   )

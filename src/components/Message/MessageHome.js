@@ -4,8 +4,9 @@ import { Grid, Icon, Transition, Button, Container, Menu, Segment, Image, Modal 
 import { AuthContext } from './../../context/auth'
 import { FETCH_USER_MESSAGES_QUERY } from './../../util/graphql'
 import AddKey from './../../components/Key/AddKey'
-import MessageUserCard from './MessageUserCard'
-import MessageSend from '../General/MessageSend'
+import MessageReceivedCard from './MessageReceivedCard'
+import MessageSentCard from './MessageSentCard'
+import MessageSend from './../General/MessageSend'
 
 export default function MessageHome() {
   const { user } = useContext(AuthContext)
@@ -19,7 +20,7 @@ export default function MessageHome() {
     setActiveItem(name)
   }
 
-  const { loading, data: { getUserMessages: messages } = {}, refetch} = useQuery(FETCH_USER_MESSAGES_QUERY, {
+  const { loading, data: { getUserReceivedMessages: messages, getUserSentMessages: sentMessages } = {}, refetch} = useQuery(FETCH_USER_MESSAGES_QUERY, {
     variables: {
       userId: user?.id
     }
@@ -59,6 +60,8 @@ export default function MessageHome() {
             />
           </Menu>
         </Grid.Column>
+
+        {/* ADD KEY */}
         <Modal
           open={open}
           onClose={() => setOpen(false)}
@@ -67,13 +70,8 @@ export default function MessageHome() {
         >
           <MessageSend setOpen={setOpen} refetch={refetch} />
         </Modal>
-        {
-          (activeItem === 'Adicionar Chave') && <AddKey />
-        }
-        {
-          (activeItem === 'Enviadas') &&
-          <span>Enviadas</span>
-        }
+
+        {/* RECEBIDAS */}
         {
           (activeItem === 'Recebidas') &&
             <Grid.Column width={12}>
@@ -91,19 +89,50 @@ export default function MessageHome() {
                           {/* <pre>
                             {JSON.stringify(message, null, 2)}
                           </pre> */}
-                          <MessageUserCard message={message} />
+                          <MessageReceivedCard message={message} />
                         </Grid.Column>
                       ))
                     }
                   </Transition.Group>
                   <Segment>
-                    We're done here.
+                    Você fez o que podia até aqui.
                   </Segment>
                 </>
               )
             }
           </Grid.Column>
         }
+
+        {/* ENVIADAS */}
+        {
+          (activeItem === 'Enviadas') &&
+            <Grid.Column width={12}>
+            {
+              !user || loading ? (
+                <Segment loading>
+                  <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+                </Segment>
+              ) : (
+                <>
+                  <Transition.Group>
+                    {
+                      user && sentMessages && sentMessages.map(message => (
+                        <Grid.Column key={message.id} style={{ marginBottom: "1rem" }}>
+                          <MessageSentCard message={message} />
+                        </Grid.Column>
+                      ))
+                    }
+                  </Transition.Group>
+                  <Segment>
+                    Você fez o que podia até aqui.
+                  </Segment>
+                </>
+              )
+            }
+          </Grid.Column>
+        }
+
+        {/* CHAVES FAVORITAS */}
         {
           (activeItem === 'Chaves Favoritas') &&
           <span>Chaves Favoritas</span>

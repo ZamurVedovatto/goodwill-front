@@ -133,7 +133,31 @@ export const FETCH_MESSAGES_QUERY = gql`
 
 export const FETCH_USER_MESSAGES_QUERY = gql`
 query getUserMessages($userId: ID!) {
-  getUserMessages(userId: $userId) {
+  getUserReceivedMessages(userId: $userId) {
+    id
+    modality
+    targetKey
+    body
+    senderId
+    senderKey
+    read
+    received
+    createdAt
+    likeCount
+    likes {
+      id
+      username
+    }
+    commentCount
+    comments {
+      id
+      username
+      createdAt
+      body
+    }
+  }
+
+  getUserSentMessages(userId: $userId) {
     id
     modality
     targetKey
@@ -159,6 +183,64 @@ query getUserMessages($userId: ID!) {
 }
 `
 
+
+export const FETCH_USER_RECEIVED_MESSAGES_QUERY = gql`
+query getUserReceivedMessages($userId: ID!) {
+  getUserReceivedMessages(userId: $userId) {
+    id
+    modality
+    targetKey
+    body
+    senderId
+    senderKey
+    read
+    received
+    createdAt
+    likeCount
+    likes {
+      id
+      username
+    }
+    commentCount
+    comments {
+      id
+      username
+      createdAt
+      body
+    }
+  }
+}
+`
+
+
+
+export const FETCH_USER_SENT_MESSAGES_QUERY = gql`
+query getUserSentMessages($userId: ID!) {
+  getUserSentMessages(userId: $userId) {
+    id
+    modality
+    targetKey
+    body
+    senderId
+    senderKey
+    read
+    received
+    createdAt
+    likeCount
+    likes {
+      id
+      username
+    }
+    commentCount
+    comments {
+      id
+      username
+      createdAt
+      body
+    }
+  }
+}
+`
 
 
 export const CREATE_MESSAGE_MUTATION = gql`
