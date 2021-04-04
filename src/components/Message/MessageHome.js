@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { useQuery } from "@apollo/client"
 import { Grid, Icon, Transition, Button, Container, Menu, Segment, Image, Modal } from 'semantic-ui-react'
 import { AuthContext } from './../../context/auth'
-import { FETCH_USER_MESSAGES_QUERY } from './../../util/graphql'
+import { FETCH_USER_FOR_MESSAGE_HOME, TOGGLE_FAVORITE_KEY_MUTATION } from './../../util/graphql'
 import AddKey from './../../components/Key/AddKey'
 import MessageReceivedCard from './MessageReceivedCard'
 import MessageSentCard from './MessageSentCard'
@@ -12,20 +12,20 @@ export default function MessageHome() {
   const { user } = useContext(AuthContext)
   const [activeItem, setActiveItem] = useState('Recebidas')
   const [open, setOpen] = React.useState(false)
-
+  
   useEffect(() => {
   }, [activeItem])
-
+  
   const handleItemClick = (e, { name }) => {
     setActiveItem(name)
   }
-
-  const { loading, data: { getUserReceivedMessages: messages, getUserSentMessages: sentMessages } = {}, refetch} = useQuery(FETCH_USER_MESSAGES_QUERY, {
+  
+  const { loading, data: { getUserReceivedMessages: messages, getUserSentMessages: sentMessages, getUserFavoritedKeys: favoritedKeys } = {}, refetch} = useQuery(FETCH_USER_FOR_MESSAGE_HOME, {
     variables: {
       userId: user?.id
     }
   })
-
+  
   return (
     <Container className="container-wrapper">
       <Grid>
@@ -135,7 +135,7 @@ export default function MessageHome() {
         {/* CHAVES FAVORITAS */}
         {
           (activeItem === 'Chaves Favoritas') &&
-          <span>Chaves Favoritas</span>
+          <pre>{JSON.stringify(favoritedKeys, null, 2)}</pre>
         }
       </Grid>
     </Container>

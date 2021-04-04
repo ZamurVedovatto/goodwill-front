@@ -17,6 +17,7 @@ export default function MessageSentCard({ message: { id, modality, targetKey, bo
   const [readMessage] = useMutation(READ_MESSAGE_MUTATION, {
     variables: { messageId: id}
   })
+  
 
   return (
     <Card fluid >

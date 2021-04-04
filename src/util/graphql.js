@@ -104,6 +104,24 @@ export const TOGGLE_ACTIVE_KEY_MUTATION = gql`
 `
 
 
+export const TOGGLE_FAVORITE_KEY_MUTATION = gql`
+  mutation favoriteKey($userId: ID!, $keyId: ID!){
+    favoriteKey(userId: $userId, keyId: $keyId){
+      id
+      type
+      title
+      confirmed
+      active
+      userId
+      username
+      address {
+        code
+      }
+    }
+  }
+`
+
+
 export const FETCH_MESSAGES_QUERY = gql`
 {
   getMessages {
@@ -131,7 +149,7 @@ export const FETCH_MESSAGES_QUERY = gql`
 `
 
 
-export const FETCH_USER_MESSAGES_QUERY = gql`
+export const FETCH_USER_FOR_MESSAGE_HOME = gql`
 query getUserMessages($userId: ID!) {
   getUserReceivedMessages(userId: $userId) {
     id
@@ -179,6 +197,16 @@ query getUserMessages($userId: ID!) {
       createdAt
       body
     }
+  }
+
+  getUserFavoritedKeys(userId: $userId) {
+    id
+    type
+    title
+    confirmed
+    active
+    userId
+    username
   }
 }
 `
