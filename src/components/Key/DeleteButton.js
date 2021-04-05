@@ -29,7 +29,7 @@ export default function DeleteButton({ keyId, userId, callback }) {
 
   return (
     <>
-      <CustomPopup content={'Delete key'}>
+      <CustomPopup content={'Excluir Chave'}>
         <Button
           as="div"
           color="red"
@@ -42,6 +42,9 @@ export default function DeleteButton({ keyId, userId, callback }) {
       </CustomPopup>
 
       <Confirm
+        cancelButton="Cancelar"
+        confirmButton="Confirmar"
+        content="Você tem certeza?"
         open={confirmOpen}
         onCancel={() => setConfirmOpen(false)}
         onConfirm={deleteKeyMutation}

@@ -30,6 +30,9 @@ export default function DeleteUserButton({ userId, callback }) {
       </CustomPopup>
 
       <Confirm
+        cancelButton="Cancelar"
+        confirmButton="Confirmar"
+        content="Você tem certeza?"
         open={confirmOpen}
         onCancel={() => setConfirmOpen(false)}
         onConfirm={deleteUserMutation}

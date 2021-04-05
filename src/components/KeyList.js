@@ -13,17 +13,29 @@ const KeyList = ({ keys, user, refetch }) => {
     },
   })
 
+  const onSetTitle = (type) => {
+    switch (type) {
+      case 'generic':
+        return 'Genérica'
+      case 'plate':
+        return 'Placa de Veículo'
+      case 'address':
+        return 'Endereço'
+      case 'schoolId':
+        return 'Número de Matrícula'
+      default:
+        return 'Genérica'
+    }
+  }
 
   return (
     <Grid stackable columns={3}>
       <Grid.Row stretched>
       {
         (keys?.length === 0) ? (
-
-            <Card.Content style={{ padding: "1rem 2rem" }}>
-              <span>Nenhuma chave registrada.</span>
-            </Card.Content>
-
+          <Card.Content style={{ padding: "1rem 2rem" }}>
+            <span>Nenhuma chave registrada.</span>
+          </Card.Content>
         ) : (
           keys?.map(userKey => (
             <Grid.Column key={userKey.id} style={{ marginBottom: "1.5rem" }}>
@@ -32,8 +44,7 @@ const KeyList = ({ keys, user, refetch }) => {
                   style={{ height: "0" }}
                   label={{ as: 'a', color: `${userKey.confirmed ? "blue" : "grey"}`, corner: 'right', icon: 'check' }}
                 />
-                {/* <pre>{JSON.stringify(userKey, null, 2)}</pre> */}
-                <Card.Content header={userKey.type} />
+                <Card.Content header={onSetTitle(userKey.type)} />
                 <Card.Content description={userKey.title} />
                 {
                   loading ? (
