@@ -2,15 +2,15 @@ import React, { useContext, useState, useEffect } from 'react'
 import { useQuery } from "@apollo/client"
 import { Grid, Icon, Transition, Button, Container, Menu, Segment, Image, Modal } from 'semantic-ui-react'
 import { AuthContext } from './../../context/auth'
-import { FETCH_USER_FOR_MESSAGE_HOME, TOGGLE_FAVORITE_KEY_MUTATION } from './../../util/graphql'
-import AddKey from './../../components/Key/AddKey'
+import { FETCH_USER_FOR_MESSAGE_HOME } from './../../util/graphql'
 import MessageReceivedCard from './MessageReceivedCard'
 import MessageSentCard from './MessageSentCard'
 import MessageSend from './../General/MessageSend'
+import HomeContent from '../HomeContent'
 
 export default function MessageHome() {
   const { user } = useContext(AuthContext)
-  const [activeItem, setActiveItem] = useState('Recebidas')
+  const [activeItem, setActiveItem] = useState('feed')
   const [open, setOpen] = React.useState(false)
   
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function MessageHome() {
     setActiveItem(name)
   }
   
-  const { loading, data: { getUserReceivedMessages: messages, getUserSentMessages: sentMessages, getUserFavoritedKeys: favoritedKeys } = {}, refetch} = useQuery(FETCH_USER_FOR_MESSAGE_HOME, {
+  const { loading, data: { getMessages: general, getUserReceivedMessages: messages, getUserSentMessages: sentMessages, getUserFavoritedKeys: favoritedKeys } = {}, refetch} = useQuery(FETCH_USER_FOR_MESSAGE_HOME, {
     variables: {
       userId: user?.id
     }
@@ -44,6 +44,11 @@ export default function MessageHome() {
         <Grid.Column width={4}>
           <Menu fluid vertical tabular>
             <Menu.Item
+              name='feed'
+              active={activeItem === 'feed'}
+              onClick={handleItemClick}
+            />
+            <Menu.Item
               name='Recebidas'
               active={activeItem === 'Recebidas'}
               onClick={handleItemClick}
@@ -51,11 +56,6 @@ export default function MessageHome() {
             <Menu.Item
               name='Enviadas'
               active={activeItem === 'Enviadas'}
-              onClick={handleItemClick}
-            />
-            <Menu.Item
-              name='Chaves Favoritas'
-              active={activeItem === 'Chaves Favoritas'}
               onClick={handleItemClick}
             />
           </Menu>
@@ -70,6 +70,17 @@ export default function MessageHome() {
         >
           <MessageSend setOpen={setOpen} refetch={refetch} />
         </Modal>
+
+
+        {/* FEED */}
+        { 
+          (user && (activeItem === 'feed') && user && general) && (
+          <Grid.Column width={12}>
+            <HomeContent loading={loading} messages={general} />
+          </Grid.Column>
+          )
+        }
+
 
         {/* RECEBIDAS */}
         {
@@ -130,12 +141,6 @@ export default function MessageHome() {
               )
             }
           </Grid.Column>
-        }
-
-        {/* CHAVES FAVORITAS */}
-        {
-          (activeItem === 'Chaves Favoritas') &&
-          <pre>{JSON.stringify(favoritedKeys, null, 2)}</pre>
         }
       </Grid>
     </Container>

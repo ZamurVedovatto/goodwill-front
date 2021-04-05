@@ -151,6 +151,28 @@ export const FETCH_MESSAGES_QUERY = gql`
 
 export const FETCH_USER_FOR_MESSAGE_HOME = gql`
 query getUserMessages($userId: ID!) {
+  getMessages {
+    id
+    modality
+    targetKey
+    body
+    senderId
+    senderKey
+    createdAt
+    likeCount
+    likes {
+      id
+      username
+    }
+    commentCount
+    comments {
+      id
+      username
+      createdAt
+      body
+    }
+  }
+  
   getUserReceivedMessages(userId: $userId) {
     id
     modality
