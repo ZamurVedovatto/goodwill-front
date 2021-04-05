@@ -59,16 +59,21 @@ export default function MenuBar() {
                 22
               </Label>
             </Menu.Item>
+
+
+            <Menu.Item
+              name="keys"
+              active={activeItem === 'keys'}
+              onClick={handleItemClick}
+              as={Link}
+              to="/user"
+            >
+              <Icon name='key' />
+            </Menu.Item>
+
             <Menu.Item>
               <Dropdown icon="user" text={user.username}>
                 <Dropdown.Menu direction="left">
-                  {/* <Dropdown.Header>User Settings</Dropdown.Header> */}
-                  <Dropdown.Item
-                    as={Link}
-                    to="/user"
-                  >
-                    Keys & Actions
-                  </Dropdown.Item>
                   <Dropdown.Item
                     as={Link}
                     to="/settings"

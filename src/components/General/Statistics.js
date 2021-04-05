@@ -12,14 +12,14 @@ const StatisticSystem = () => (
       <Statistic.Value text>
         Mais de
         <br />
-        três mil
+        três milhões
       </Statistic.Value>
       <Statistic.Label>mensagens enviadas</Statistic.Label>
     </Statistic>
 
     <Statistic>
       <Statistic.Value>
-        <Icon name='building' />57
+        <Icon name='building' />357
       </Statistic.Value>
       <Statistic.Label>Empresas cadastradas</Statistic.Label>
     </Statistic>
@@ -27,7 +27,7 @@ const StatisticSystem = () => (
     <Statistic>
       <Statistic.Value>
         <Image src='https://react.semantic-ui.com/images/avatar/small/joe.jpg' className='circular inline' />
-        4235
+        420 mil
       </Statistic.Value>
       <Statistic.Label>Membros</Statistic.Label>
     </Statistic>
