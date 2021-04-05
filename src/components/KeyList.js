@@ -19,7 +19,11 @@ const KeyList = ({ keys, user, refetch }) => {
       <Grid.Row stretched>
       {
         (keys?.length === 0) ? (
-          <span>Nenhuma chave registrada.</span>
+
+            <Card.Content style={{ padding: "1rem 2rem" }}>
+              <span>Nenhuma chave registrada.</span>
+            </Card.Content>
+
         ) : (
           keys?.map(userKey => (
             <Grid.Column key={userKey.id} style={{ marginBottom: "1.5rem" }}>

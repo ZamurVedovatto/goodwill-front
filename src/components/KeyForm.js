@@ -11,7 +11,7 @@ import FormKeyGeneric from './Key/FormKeyGeneric'
 import FormKeySimpleInput from './Key/FormKeySimpleInput'
 import FormKeyAddress from './Key/FormKeyAddress';
 
-export default function KeyForm({ user }) {
+export default function KeyForm({ user, setActiveItem, refetch }) {
   const history = useHistory();
   const [values, setValues] = useState({
     userId: user.id,
@@ -21,7 +21,6 @@ export default function KeyForm({ user }) {
   })
 
   const onChange = (event) => {
-    console.log(event)
     setValues({
       ...values,
       [event.target.name]: event.target.value
@@ -31,7 +30,8 @@ export default function KeyForm({ user }) {
   const [createKey, { error }] = useMutation(CREATE_KEY_MUTATION, {
     variables: values,
     update(proxy, result) {
-      history.push("/user");
+      refetch();
+      setActiveItem("minhas chaves");
     },
     onError(err) {
       return err;
@@ -80,8 +80,6 @@ export default function KeyForm({ user }) {
                 <Placeholder.Line />
               </Placeholder.Header>
               <Placeholder.Paragraph>
-                <Placeholder.Line />
-                <Placeholder.Line />
                 <Placeholder.Line />
                 <Placeholder.Line />
               </Placeholder.Paragraph>

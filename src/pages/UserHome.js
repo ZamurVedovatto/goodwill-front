@@ -8,16 +8,8 @@ import { FETCH_USER_KEYS_QUERY } from './../util/graphql'
 import AddKey from '../components/Key/AddKey'
 
 export default function UserHome() {
-  const history = useHistory();
   const { context, user } = useContext(AuthContext)
   const [activeItem, setActiveItem] = useState('minhas chaves')
-
-  useEffect(() => {
-    // setLoading(true)
-    // setTimeout(() => {
-    //   setLoading(false)
-    // }, 500);
-  }, [activeItem])
 
   const handleItemClick = (e, { name }) => {
     setActiveItem(name)
@@ -69,7 +61,7 @@ export default function UserHome() {
           </Menu>
         </Grid.Column>
         {
-          (activeItem === 'Adicionar Chave') && <AddKey />
+          (activeItem === 'Adicionar Chave') && <AddKey setActiveItem={setActiveItem} refetch={refetch} />
         }
           {
           (activeItem === 'Chaves Serviço') &&

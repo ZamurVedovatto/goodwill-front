@@ -4,21 +4,18 @@ import KeyForm from '../KeyForm'
 import { Container, Grid, Breadcrumb, Segment, Card } from 'semantic-ui-react'
 import { AuthContext } from './../../context/auth'
 
-export default function AddKey() {
+export default function AddKey({ setActiveItem, refetch }) {
   const { context, user } = useContext(AuthContext)
 
   return (
     <Grid.Column width={12}>
       <Card fluid>
         <Card.Content>
-          <Card.Header>Add Key</Card.Header>
-          <Card.Meta>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</Card.Meta>
-          {/* <Card.Description>
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-          </Card.Description> */}
+          <Card.Header>Adicionar Chave</Card.Header>
+          <Card.Meta>Criar nova chave pessoal, seja ela genérica ou referente à algo somente seu.</Card.Meta>
         </Card.Content>
         <Card.Content>
-          <KeyForm user={user} />
+          <KeyForm user={user} setActiveItem={setActiveItem} refetch={refetch} />
         </Card.Content>
       </Card>
     </Grid.Column>
