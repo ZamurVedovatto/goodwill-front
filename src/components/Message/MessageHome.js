@@ -20,7 +20,7 @@ export default function MessageHome() {
     setActiveItem(name)
   }
   
-  const { loading, data: { getMessages: general, getUserReceivedMessages: messages, getUserSentMessages: sentMessages, getUserFavoritedKeys: favoritedKeys } = {}, refetch} = useQuery(FETCH_USER_FOR_MESSAGE_HOME, {
+  const { loading, data: { getMessages: general, getUserReceivedMessages: messages, getUserSentMessages: sentMessages } = {}, refetch} = useQuery(FETCH_USER_FOR_MESSAGE_HOME, {
     variables: {
       userId: user?.id
     }
@@ -73,11 +73,17 @@ export default function MessageHome() {
 
 
         {/* FEED */}
-        { 
-          (user && (activeItem === 'feed') && user && general) && (
-          <Grid.Column width={12}>
-            <HomeContent loading={loading} messages={general} />
-          </Grid.Column>
+        { (activeItem === 'feed') && (
+            !user || loading ? (
+              <Segment loading>
+                <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+              </Segment>
+            ) :
+            (
+              <Grid.Column width={12}>
+                <HomeContent loading={loading} messages={general} />
+              </Grid.Column>
+            )
           )
         }
 

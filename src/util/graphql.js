@@ -220,16 +220,20 @@ query getUserMessages($userId: ID!) {
       body
     }
   }
+}
+`
 
+export const FETCH_USER_FAVORITE_KEYS_QUERY = gql`
+query getUserReceivedMessages($userId: ID!) {
   getUserFavoritedKeys(userId: $userId) {
-    id
-    type
-    title
-    confirmed
-    active
-    userId
-    username
-  }
+      id
+      type
+      title
+      confirmed
+      active
+      userId
+      username
+    }
 }
 `
 

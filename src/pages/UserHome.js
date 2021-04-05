@@ -10,7 +10,7 @@ import AddKey from '../components/Key/AddKey'
 export default function UserHome() {
   const history = useHistory();
   const { context, user } = useContext(AuthContext)
-  const [activeItem, setActiveItem] = useState('Chaves Próprias')
+  const [activeItem, setActiveItem] = useState('minhas chaves')
 
   useEffect(() => {
     // setLoading(true)
@@ -57,13 +57,13 @@ export default function UserHome() {
         <Grid.Column width={4}>
           <Menu fluid vertical tabular>
             <Menu.Item
-              name='Chaves Próprias'
-              active={activeItem === 'Chaves Próprias'}
+              name='minhas chaves'
+              active={activeItem === 'minhas chaves'}
               onClick={handleItemClick}
             />
             <Menu.Item
-              name='Chaves Institucionais'
-              active={activeItem === 'Chaves Institucionais'}
+              name='Chaves Serviço'
+              active={activeItem === 'Chaves Serviço'}
               onClick={handleItemClick}
             />
           </Menu>
@@ -72,11 +72,11 @@ export default function UserHome() {
           (activeItem === 'Adicionar Chave') && <AddKey />
         }
           {
-          (activeItem === 'Chaves Institucionais') &&
-          <span>Chaves Institucionais</span>
+          (activeItem === 'Chaves Serviço') &&
+          <span>Chaves Serviço</span>
         }
         {
-          (activeItem === 'Chaves Próprias') &&
+          (activeItem === 'minhas chaves') &&
             <Grid.Column width={12}>
               {
                 loading ? (
@@ -91,16 +91,16 @@ export default function UserHome() {
                           <Grid.Column>
                             <Card fluid>
                               <Card.Content>
-                                <Card.Header>Keys</Card.Header>
-                                <Card.Meta>Texto aqui</Card.Meta>
+                                <Card.Header>Minhas Chaves</Card.Header>
+                                <Card.Meta>Visualize, edite ou exclua.</Card.Meta>
                                 <Card.Description>
-                                  It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                                  Chaves criadas pela próprio usuário.
                                 </Card.Description>
                               </Card.Content>
                               <Card.Content>
                                 {
                                   (loading || !keys || !user) ? (
-                                    <span>loading</span>
+                                    <span>carregando</span>
                                   ) : (
                                     <KeyList keys={keys} user={user} refetch={refetch} />
                                   )

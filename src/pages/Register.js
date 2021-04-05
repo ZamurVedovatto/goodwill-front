@@ -37,7 +37,7 @@ export default function Register(props) {
   return (
     <Segment className="login-wrapper">
       <Form onSubmit={onSubmit} noValidate className={loading ? 'loading' : ''}>
-        <h1>Register</h1>
+        <h1>Criar Conta</h1>
         <Form.Input
           label="Username"
           placeholder="Username"
@@ -57,8 +57,8 @@ export default function Register(props) {
           onChange={onChange}
         />
         <Form.Input
-          label="Name"
-          placeholder="Name"
+          label="Nome"
+          placeholder="Nome"
           name="name"
           type="text"
           value={values.name}
@@ -66,8 +66,8 @@ export default function Register(props) {
           onChange={onChange}
         />
         <Form.Input
-          label="Password"
-          placeholder="Password"
+          label="Senha"
+          placeholder="Senha"
           name="password"
           type="password"
           value={values.password}
@@ -75,8 +75,8 @@ export default function Register(props) {
           onChange={onChange}
         />
         <Form.Input
-          label="Confirm Password"
-          placeholder="Confirm Password"
+          label="Confirmar Senha"
+          placeholder="Confirmar Senha"
           name="confirmPassword"
           type="password"
           value={values.confirmPassword}
@@ -84,7 +84,7 @@ export default function Register(props) {
           onChange={onChange}
         />
         <Button type="submit" primary>
-          Register
+          Criar
         </Button>
       </Form>
       {

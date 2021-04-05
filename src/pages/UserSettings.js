@@ -7,7 +7,7 @@ import UserProfileForm from '../components/UserProfileForm'
 
 export default function UserSettings() {
   const { user, logout } = useContext(AuthContext)
-  const [activeItem, setActiveItem] = useState('edit profile')
+  const [activeItem, setActiveItem] = useState('editar perfil')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -44,18 +44,18 @@ export default function UserSettings() {
               <Grid.Column width={4}>
                 <Menu fluid vertical tabular>
                   <Menu.Item
-                    name='edit profile'
-                    active={activeItem === 'edit profile'}
+                    name='editar perfil'
+                    active={activeItem === 'editar perfil'}
                     onClick={handleItemClick}
                   />
                   <Menu.Item
-                    name='change password'
-                    active={activeItem === 'change password'}
+                    name='alterar senha'
+                    active={activeItem === 'alterar senha'}
                     onClick={handleItemClick}
                   />
                   <Menu.Item
-                    name='delete account'
-                    active={activeItem === 'delete account'}
+                    name='remover conta'
+                    active={activeItem === 'remover conta'}
                     onClick={handleItemClick}
                   />
                 </Menu>
@@ -63,21 +63,21 @@ export default function UserSettings() {
 
               <Grid.Column width={12}>
                 {
-                  activeItem === 'edit profile' && (
+                  activeItem === 'editar perfil' && (
                     <Segment>
                       <UserProfileForm user={user} />
                     </Segment>
                   )
                 }
                 {
-                  activeItem === 'change password' && (
+                  activeItem === 'alterar senha' && (
                     <Segment>
-                      change password
+                      alterar senha
                     </Segment>
                   )
                 }
                 {
-                  activeItem === 'delete account' && (
+                  activeItem === 'remover conta' && (
                     <Segment loading={loading}>
                       <DeleteUserButton userId={user.id} callback={deleteUserCallback} />
                     </Segment>

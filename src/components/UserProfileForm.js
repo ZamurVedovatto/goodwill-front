@@ -18,13 +18,13 @@ const UserProfileForm = ({user}) => {
         <input placeholder={user.username} />
       </Form.Field>
       <Form.Field>
-        <label>Name</label>
-        <input placeholder={user.name ? user.name : 'Name'} />
+        <label>Nome</label>
+        <input placeholder={user.name ? user.name : 'Nome'} />
       </Form.Field>
       <Form.Field>
-        <Checkbox label='I agree to the Terms and Conditions' />
+        <Checkbox label='Eu concordo com os Termos e Condições' />
       </Form.Field>
-      <Button type='submit'>Submit</Button>
+      <Button type='submit'>Salvar</Button>
     </Form>
   )
 }

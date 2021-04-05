@@ -24,30 +24,6 @@ export default function MenuBar() {
         <Menu borderless color="teal" style={{ marginBottom: "0", border: "none", boxShadow: "none", width: "100%", alignItems: "center" }}>
           <Menu.Menu>
             <Menu.Item
-              icon="home"
-              name="Feed"
-              active={activeItem === 'Feed'}
-              onClick={handleItemClick}
-              as={Link}
-              to="/"
-            />
-            <Menu.Item
-              icon="building"
-              name="Serviços"
-              active={activeItem === 'Serviços'}
-              onClick={handleItemClick}
-              as={Link}
-              to="/company"
-            />
-          </Menu.Menu>
-          {/* <Menu.Menu style={{ margin: "0 auto"}}>
-            <Menu.Item>
-              <SearchStandard />
-            </Menu.Item>
-          </Menu.Menu> */}
-
-          <Menu.Menu position='right'>
-            <Menu.Item
               name="messages"
               active={activeItem === 'messages'}
               onClick={handleItemClick}
@@ -60,7 +36,16 @@ export default function MenuBar() {
               </Label>
             </Menu.Item>
 
+            <Menu.Item
+              icon="building"
+              active={activeItem === 'Serviços'}
+              onClick={handleItemClick}
+              as={Link}
+              to="/company"
+            />
+          </Menu.Menu>
 
+          <Menu.Menu position='right'>
             <Menu.Item
               name="keys"
               active={activeItem === 'keys'}
@@ -72,20 +57,21 @@ export default function MenuBar() {
             </Menu.Item>
 
             <Menu.Item>
-              <Dropdown icon="user" text={user.username}>
+              <Dropdown icon="user">
                 <Dropdown.Menu direction="left">
+                <Dropdown.Header icon='tags' content={user.username} />
                   <Dropdown.Item
                     as={Link}
                     to="/settings"
                   >
-                    Settings
+                    Configurações
                   </Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item
                     name='logout'
                     onClick={logout}
                   >
-                    Logout
+                    Sair
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
