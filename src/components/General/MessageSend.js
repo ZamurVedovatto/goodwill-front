@@ -2,10 +2,10 @@ import React from 'react'
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import MessageForm from './../Message/MessageForm'
 
-export default function MessageSend({ setOpen, refetch }) {
+export default function MessageSend({ setOpen, refetch, userKeys }) {
   return (
     <>
-      <Modal.Header>Mensagem</Modal.Header>
+      <Modal.Header>Enviar Mensagem</Modal.Header>
       <Modal.Content image>
         <Icon name='send' size='big' color='teal' />
         
@@ -15,12 +15,12 @@ export default function MessageSend({ setOpen, refetch }) {
           </p>
           <p>Antes de mais nada, defina se a mensagem será enviada para uma chave ou várias, ok?</p>
 
-          <MessageForm refetch={refetch} />
+          <MessageForm refetch={refetch} setOpen={setOpen} />
 
         </Modal.Description>
         <Icon name='send' size='massive' flipped='vertically' color='teal'  />
       </Modal.Content>
-      <Modal.Actions>
+      {/* <Modal.Actions>
         <Button color='black' onClick={() => setOpen(false)}>
           Desisti
         </Button>
@@ -31,7 +31,7 @@ export default function MessageSend({ setOpen, refetch }) {
           onClick={() => setOpen(false)}
           positive
         />
-      </Modal.Actions>
+      </Modal.Actions> */}
     </>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { Button, Form, Container, Segment, Radio } from 'semantic-ui-react'
+import { Button, Form, Container, Segment, Radio, Icon, Image } from 'semantic-ui-react'
 import { useMutation, useQuery } from '@apollo/client'
 import { useForm } from './../../util/hooks'
 import { FETCH_MESSAGES_QUERY, CREATE_MESSAGE_MUTATION, FETCH_KEYS_QUERY } from './../../util/graphql'
@@ -7,25 +7,9 @@ import SearchComponent from './SearchComponent'
 import { AuthContext } from './../../context/auth'
 import keyTypes from './../../util/consts/keyTypes';
 
-export default function MessageForm({refetch}) {
-  const { keys: userKeys } = useContext(AuthContext)
+export default function MessageForm({refetch, setOpen }) {
   const { loading, data: { getKeys: keys } = {}} = useQuery(FETCH_KEYS_QUERY)
   const [broadcast, setBroadcast] = useState(false)
-  const [userKeysOptions, setUserKeysOptions] = useState([])
-
-  useEffect(() => {
-    let newArr = []
-    userKeys.forEach(userKey => {
-      let newKey = {
-        key: userKey.id,
-        text: userKey.title,
-        value: userKey.title,
-      }
-      newArr.push(newKey)
-    })
-    setUserKeysOptions(newArr);
-
-  }, [keys])
 
   const { values, onChange, onSubmit } = useForm(createMessageCallback, {
     modality: 'single',
@@ -56,17 +40,16 @@ export default function MessageForm({refetch}) {
   });
 
   function createMessageCallback() {
-    console.log(values)
     createMessage()
     refetch()
+    setOpen(false)
   }
 
-  const onSetSelection = (e) => {
-    console.log(e)
+  const onSetSelection = (key) => {
     let event = {
       target: {
         name: "senderKey",
-        value: e.target.textContent
+        value: key.title
       }
     }
     onChange(event)
@@ -91,9 +74,9 @@ export default function MessageForm({refetch}) {
             <Radio
               label='Broadcast'
               name='radioGroup'
-              value="false"
+              value="true"
               checked={broadcast}
-              onChange={() => setBroadcast(true)}
+              onChange={() => setBroadcast(false)}
             />
           </Form.Field>
         </Form>
@@ -141,24 +124,31 @@ export default function MessageForm({refetch}) {
               </Form.Field>
             </Form>
           ) : (
+            loading ? (
+              <Segment loading>
+                <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+              </Segment>
+            ) : (
             <Segment>
               <Form onSubmit={onSubmit}>
                 <Form.Field>
-                  <Form.Select
-                    fluid
-                    label='Escolher sua Chave'
-                    name="senderKey"
-                    options={userKeysOptions}
-                    onChange={(e) => onSetSelection(e)}
-                    value={values.senderKey}
-                    error={error ? true : false}
-                    placeholder='Chave'
-                  />
+                  <label>Escolha uma de suas Chaves</label>
+                  <div>
+                    {keys.map((userKey) => (
+                      <Button
+                        type="button"
+                        primary
+                        basic={userKey.title !== values.senderKey}
+                        style={{ margin: " .25rem .15rem"}} compact circular key={userKey.id}
+                        onClick={() => onSetSelection(userKey)}  
+                      >{userKey.title}</Button>
+                    ))}
+                  </div>
                 </Form.Field>
                 {
                   (!loading && keys) ? (
                     <Form.Field>
-                      <label>Buscar Chave</label>
+                      <label>Buscar Chave que receberá a mensagem</label>
                       <SearchComponent setTargetKey={onChange} keys={keys} />
                     </Form.Field>
                   ) : (
@@ -175,13 +165,19 @@ export default function MessageForm({refetch}) {
                     error={error ? true : false}
                   />
                 </Form.Field>
-                <Form.Field>
-                  <Button type="submit" color="teal">
-                    Submit
+                <Form.Field style={{marginTop: "3rem"}}>
+                  <Button color='black' basic onClick={() => setOpen(false)}>
+                    Desisti
+                  </Button>
+                  <Button type="submit" color="teal" icon labelPosition='right' floated="right">
+                    Enviar
+                    <Icon name='right arrow' />
                   </Button>
                 </Form.Field>
               </Form>
             </Segment>
+
+            )
           )
         }
 

@@ -34,6 +34,7 @@ export default function MessageHome() {
             <Button
               floated='right'
               onClick={() => setOpen(true)}
+              primary
               >
               <Icon name='add' style={{margin: 0}} />
             </Button>
