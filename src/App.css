@@ -77,3 +77,10 @@ body {
 .dropdown .text {
   margin-right: .5rem;
 }
+
+.ui.search>.results {
+  height: 20vh;
+  max-height: 20vh;
+  overflow-y: auto;
+  width: 100%;
+}

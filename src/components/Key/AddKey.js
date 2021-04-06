@@ -8,7 +8,7 @@ export default function AddKey({ setActiveItem, refetch }) {
   const { context, user } = useContext(AuthContext)
 
   return (
-    <Grid.Column width={12}>
+    <Grid.Column width={16}>
       <Card fluid>
         <Card.Content>
           <Card.Header>Adicionar Chave</Card.Header>

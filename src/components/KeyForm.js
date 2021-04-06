@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import uuid from 'react-uuid'
 
-import { Button, Form, Label, Select, Card, Placeholder } from 'semantic-ui-react'
+import { Select, Card, Placeholder } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 import { CREATE_KEY_MUTATION } from './../util/graphql'
-import { useHistory } from "react-router-dom";
 import keyTypes from './../util/consts/keyTypes';
 
 import FormKeyGeneric from './Key/FormKeyGeneric'
@@ -12,7 +11,6 @@ import FormKeySimpleInput from './Key/FormKeySimpleInput'
 import FormKeyAddress from './Key/FormKeyAddress';
 
 export default function KeyForm({ user, setActiveItem, refetch }) {
-  const history = useHistory();
   const [values, setValues] = useState({
     userId: user.id,
     username: user.username,

@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import MessageForm from './../Message/MessageForm'
 
-export default function MessageSend({ setOpen, refetch, userKeys }) {
+export default function MessageSend({ setOpen, refetch, user }) {
   return (
     <>
       <Modal.Header>Enviar Mensagem</Modal.Header>
@@ -15,7 +15,7 @@ export default function MessageSend({ setOpen, refetch, userKeys }) {
           </p>
           <p>Antes de mais nada, defina se a mensagem será enviada para uma chave ou várias, ok?</p>
 
-          <MessageForm refetch={refetch} setOpen={setOpen} />
+          <MessageForm refetch={refetch} setOpen={setOpen} user={user} />
 
         </Modal.Description>
         <Icon name='send' size='massive' flipped='vertically' color='teal'  />

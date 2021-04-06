@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid, Segment, Card, Image, Loader } from 'semantic-ui-react'
+import { Button, Grid, Card, Image, Loader } from 'semantic-ui-react'
 import DeleteButton from './Key/DeleteButton'
 import { useMutation } from '@apollo/client'
 import { TOGGLE_ACTIVE_KEY_MUTATION } from './../util/graphql'
@@ -29,7 +29,7 @@ const KeyList = ({ keys, user, refetch }) => {
   }
 
   return (
-    <Grid stackable columns={3}>
+    <Grid stackable columns={4} padded stretched>
       <Grid.Row stretched>
       {
         (keys?.length === 0) ? (

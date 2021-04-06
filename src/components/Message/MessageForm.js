@@ -2,13 +2,18 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Button, Form, Container, Segment, Radio, Icon, Image } from 'semantic-ui-react'
 import { useMutation, useQuery } from '@apollo/client'
 import { useForm } from './../../util/hooks'
-import { FETCH_MESSAGES_QUERY, CREATE_MESSAGE_MUTATION, FETCH_KEYS_QUERY } from './../../util/graphql'
+import { FETCH_MESSAGES_QUERY, CREATE_MESSAGE_MUTATION, FETCH_ALL_KEYS_QUERY } from './../../util/graphql'
 import SearchComponent from './SearchComponent'
-import { AuthContext } from './../../context/auth'
 import keyTypes from './../../util/consts/keyTypes';
 
-export default function MessageForm({refetch, setOpen }) {
-  const { loading, data: { getKeys: keys } = {}} = useQuery(FETCH_KEYS_QUERY)
+export default function MessageForm({refetch, setOpen, user }) {
+
+  const { loading, data: { getUserKeys: userKeys, getKeys: keys } = {} } = useQuery(FETCH_ALL_KEYS_QUERY, {
+    variables: {
+      userId: user?.id
+    }
+  })
+  
   const [broadcast, setBroadcast] = useState(false)
 
   const { values, onChange, onSubmit } = useForm(createMessageCallback, {
@@ -134,7 +139,7 @@ export default function MessageForm({refetch, setOpen }) {
                 <Form.Field>
                   <label>Escolha uma de suas Chaves</label>
                   <div>
-                    {keys.map((userKey) => (
+                    {!loading && userKeys?.map((userKey) => (
                       <Button
                         type="button"
                         primary

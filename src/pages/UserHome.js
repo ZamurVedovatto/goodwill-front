@@ -1,8 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { useQuery, useLazyQuery } from "@apollo/client"
-import { Grid, Icon, Card , Button, Container, Tab, Menu, Segment, Image } from 'semantic-ui-react'
+import { useQuery } from "@apollo/client"
+import { Grid, Icon, Card , Button, Container, Menu, Segment, Image } from 'semantic-ui-react'
 import KeyList from './../components/KeyList'
-import { Link, useHistory } from 'react-router-dom'
 import { AuthContext } from './../context/auth'
 import { FETCH_USER_KEYS_QUERY } from './../util/graphql'
 import AddKey from '../components/Key/AddKey'
@@ -33,21 +32,7 @@ export default function UserHome() {
     <Container className="container-wrapper">
       <Grid>
         <Grid.Column width={16}>
-          <Grid.Row>
-            <Button
-              floated='right'
-              name='Adicionar Chave'
-              active={activeItem === 'Adicionar Chave'}
-              onClick={handleItemClick}
-              >
-              <Icon name='add' style={{margin: 0}} />
-            </Button>
-          </Grid.Row>
-        </Grid.Column>
-      </Grid>
-      <Grid>
-        <Grid.Column width={4}>
-          <Menu fluid vertical tabular>
+          <Menu fluid tabular>
             <Menu.Item
               name='minhas chaves'
               active={activeItem === 'minhas chaves'}
@@ -58,6 +43,16 @@ export default function UserHome() {
               active={activeItem === 'Chaves Serviço'}
               onClick={handleItemClick}
             />
+
+            <Menu.Item position="right">
+              <Button
+                name='Adicionar Chave'
+                active={activeItem === 'Adicionar Chave'}
+                onClick={handleItemClick}
+                >
+                <Icon name='add' style={{margin: 0}} />
+              </Button>
+            </Menu.Item>
           </Menu>
         </Grid.Column>
         {
@@ -69,7 +64,7 @@ export default function UserHome() {
         }
         {
           (activeItem === 'minhas chaves') &&
-            <Grid.Column width={12}>
+            <Grid.Column width={16}>
               {
                 loading ? (
                   <Segment loading>

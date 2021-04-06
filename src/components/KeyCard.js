@@ -1,11 +1,10 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, Icon, Label, Image, Button, Popup } from 'semantic-ui-react'
+import { Card, Icon, Image } from 'semantic-ui-react'
 import moment from 'moment'
 
 import { AuthContext } from './../context/auth'
 import DeleteButton from './../components/DeleteButton'
-import CustomPopup from '../util/CustomPopup'
 
 export default function KeyCard({ keyItem: { id, type, confirmed, active, createdAt, username, key }}) {
   const { user } = useContext(AuthContext)

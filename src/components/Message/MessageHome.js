@@ -73,7 +73,7 @@ export default function MessageHome() {
                 onOpen={() => setOpen(true)}
                 closeOnEscape={false}
               >
-                <MessageSend setOpen={setOpen} refetch={refetch} />
+                <MessageSend setOpen={setOpen} refetch={refetch} user={user} />
               </Modal>
       
       

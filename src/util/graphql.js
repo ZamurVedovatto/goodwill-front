@@ -34,7 +34,7 @@ export const LOGIN_USER = gql `
 
 
 export const FETCH_USER_KEYS_QUERY = gql`
-  query getUserKeys($userId: String!){
+  query getUserKeys($userId: ID!){
     getUserKeys(userId: $userId){
       id
       type
@@ -62,6 +62,29 @@ export const FETCH_KEYS_QUERY = gql`
   }
 `
 
+export const FETCH_ALL_KEYS_QUERY = gql`
+query getAllKeys($userId: ID!) {
+  getUserKeys(userId: $userId){
+    id
+    type
+    confirmed
+    active
+    createdAt
+    username
+    title
+  }
+
+  getKeys {
+    id
+    type
+    confirmed
+    active
+    createdAt
+    username
+    title
+  }
+}
+`
 
 export const CREATE_KEY_MUTATION = gql`
   mutation createKey($userId: ID!, $username: String!, $type: String!, $title: String!){
