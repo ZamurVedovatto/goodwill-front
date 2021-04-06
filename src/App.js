@@ -26,9 +26,10 @@ function App() {
         <Route path='/company' component={CompanyProfile} />
         <Route path='/user' component={UserHome} />
         <Route path='/settings' component={UserSettings} />
+        <Route exact path="/messages/:messageId" component={SingleMessage} />
+        
         <AuthRoute path='/login' component={Login} />
         <AuthRoute path='/register' component={Register} />
-        <Route exact path="/messages/:messageId" component={SingleMessage} />
       </Router>
       <Image className="img-footer" src={logoImg} />
     </AuthProvider>

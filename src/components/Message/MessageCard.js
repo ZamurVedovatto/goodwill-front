@@ -11,22 +11,26 @@ import CustomPopup from './../../util/CustomPopup'
 export default function MessageUserCard({ message: { id, modality, targetKey, body, senderId, createdAt, comments, commentCount, likes, likeCount }}) {
   const { user } = useContext(AuthContext)
 
+  const onSetModalityText = (modality) => {
+    return (modality === 'single') ? "Mensagem Direta" : "Mensagem para múltiplas chaves"
+  }
+
   return (
     <Card fluid>
       <Card.Content>
-        <Image
+        {/* <Image
           floated='right'
           size='mini'
           src='https://picsum.photos/200'
           circular
-        />
+        /> */}
         <Card.Header>{body}</Card.Header>
-        <Card.Meta as={Link} to={`/messages/${id}`}>{modality} - {moment(createdAt).fromNow(true)}</Card.Meta>
+        <Card.Meta as={Link} to={`/messages/${id}`}>{onSetModalityText(modality)} - {moment(createdAt).fromNow(true)}</Card.Meta>
         <Card.Description className="description-cutted">{targetKey}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <LikeButton message={{ id, likes, likeCount }} user={user} />
-        <CustomPopup content='Comment on message'>
+        <CustomPopup content='Comentários'>
           <Button labelPosition='right' as={Link} to={`/messages/${id}`}>
             <Button color='blue' basic>
               <Icon name='comments' />

@@ -48,7 +48,7 @@ export default function MessageSentCard({ message: { id, modality, targetKey, bo
       </Card.Content>
       <Card.Content extra>
         <LikeButton message={{ id, likes, likeCount }} user={user} />
-        <CustomPopup content='Comment on message'>
+        <CustomPopup content='Comentários'>
           <Button labelPosition='right' as={Link} to={`/messages/${id}`}>
             <Button color='blue' basic>
               <Icon name='comments' />

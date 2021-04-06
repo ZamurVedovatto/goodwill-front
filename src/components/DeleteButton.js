@@ -34,7 +34,7 @@ export default function DeleteButton({ messageId, commentId, callback }) {
 
   return (
     <>
-      <CustomPopup content={commentId ? 'Delete comment' : 'Delete message'}>
+      <CustomPopup content={commentId ? 'Apagar comentário' : 'Apagar mensagem'}>
         <Button
           as="div"
           color="red"

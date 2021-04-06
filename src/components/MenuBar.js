@@ -1,10 +1,8 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { Menu, Dropdown, Modal, Icon, Label } from 'semantic-ui-react'
+import { Menu, Dropdown, Icon, Label } from 'semantic-ui-react'
 import { AuthContext } from './../context/auth'
-
-import SearchStandard from './../components/SearchStandard'
 
 export default function MenuBar() {
   const { user, logout } = useContext(AuthContext)

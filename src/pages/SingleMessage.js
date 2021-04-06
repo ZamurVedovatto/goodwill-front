@@ -65,11 +65,11 @@ export default function SingleMessage(props) {
                 <hr />
                 <Card.Content extra>
                   <LikeButton user={user} message={{ id, likeCount, likes }} />
-                  <CustomPopup content="Comment on message">
+                  <CustomPopup content="Comentários">
                     <Button
                       as="div"
                       labelPosition="right"
-                      onClick={() => console.log('comment on message')}
+                      onClick={() => console.log('Comentários')}
                     >
                       <Button basic color="blue">
                         <Icon name="comments" />
