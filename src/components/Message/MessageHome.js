@@ -33,23 +33,10 @@ export default function MessageHome() {
         <Login />
       ) : (
         <>
-          <Container className="container-wrapper">
+          <Container className="container-wrapper content-tabs-wrapper">
             <Grid>
               <Grid.Column width={16}>
-                <Grid.Row>
-                  <Button
-                    floated='right'
-                    onClick={() => setOpen(true)}
-                    primary
-                    >
-                    <Icon name='add' style={{margin: 0}} />
-                  </Button>
-                </Grid.Row>
-              </Grid.Column>
-            </Grid>
-            <Grid>
-              <Grid.Column width={4}>
-                <Menu fluid vertical tabular>
+                <Menu fluid tabular>
                   <Menu.Item
                     name='feed'
                     active={activeItem === 'feed'}
@@ -65,6 +52,17 @@ export default function MessageHome() {
                     active={activeItem === 'Enviadas'}
                     onClick={handleItemClick}
                   />
+                  <Menu.Item
+                    position="right"
+                    >
+                    <Button
+                      floated='right'
+                      onClick={() => setOpen(true)}
+                      primary
+                      >
+                      <Icon name='add' style={{margin: 0}} />
+                    </Button>
+                  </Menu.Item>
                 </Menu>
               </Grid.Column>
       
@@ -87,7 +85,7 @@ export default function MessageHome() {
                     </Segment>
                   ) :
                   (
-                    <Grid.Column width={12}>
+                    <Grid.Column width={16}>
                       <HomeContent loading={loading} messages={general} />
                     </Grid.Column>
                   )
@@ -97,7 +95,7 @@ export default function MessageHome() {
               {/* RECEBIDAS */}
               {
                 (activeItem === 'Recebidas') &&
-                  <Grid.Column width={12}>
+                  <Grid.Column width={16}>
                   {
                     loading ? (
                       <Segment loading>
@@ -129,7 +127,7 @@ export default function MessageHome() {
               {/* ENVIADAS */}
               {
                 (activeItem === 'Enviadas') &&
-                  <Grid.Column width={12}>
+                  <Grid.Column width={16}>
                   {
                     loading ? (
                       <Segment loading>
