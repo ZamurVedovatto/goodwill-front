@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import uuid from 'react-uuid'
 
-import { Select, Card, Placeholder } from 'semantic-ui-react'
+import { Form, Button, Card, Placeholder } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 import { CREATE_KEY_MUTATION } from './../util/graphql'
 import keyTypes from './../util/consts/keyTypes';
@@ -14,8 +14,8 @@ export default function KeyForm({ user, setActiveItem, refetch }) {
   const [values, setValues] = useState({
     userId: user.id,
     username: user.username,
-    type: '',
-    title: '',
+    type: 'generic',
+    title: uuid(),
   })
 
   const onChange = (event) => {
@@ -44,20 +44,48 @@ export default function KeyForm({ user, setActiveItem, refetch }) {
     createKey()
   }
 
-  const onChangeSelect = (e) => {
-    console.log(e.target.title)
-    let newTitle = (e.target.title === 'generic') ? uuid() : ''
-    console.log(newTitle)
-    setValues({
-      ...values,
-      type: e.target.title,
-      title: newTitle
-    })
+  const onSetSelection = (key) => {
+    console.log(key)
+    let event = {
+      target: {
+        name: "type",
+        value: key.value
+      }
+    }
+    if (key.value === 'generic') {
+      setValues({
+        ...values,
+        title: uuid()
+      })
+    }
+    onChange(event)
+    console.log(values)
   }
 
   return (
     <>
-      <Card centered>
+      {/* key: 'generic',
+      value: "generic",
+      text: "Genérica",
+      title: "generic", */}
+
+      <Form.Field>
+        <label>Escolha o tipo da nova Chave</label>
+        <div>
+          {keyTypes?.map((keyType) => (
+            <Button
+              type="button"
+              primary
+              size={"large"}
+              basic={keyType.title !== values.type}
+              style={{ margin: " .25rem .15rem"}} compact circular key={keyType.value}
+              onClick={() => onSetSelection(keyType)}  
+            >{keyType.text}</Button>
+          ))}
+        </div>
+      </Form.Field>
+
+      {/* <Card centered>
         <Select
           fluid
           label='Tipo'
@@ -67,8 +95,8 @@ export default function KeyForm({ user, setActiveItem, refetch }) {
           error={error ? true : false}
           placeholder='Tipo'
         />
-      </Card>
-      <Card centered>
+      </Card> */}
+      <Card fluid>
         <Card.Content>
           {
             (values.type === '') && 
