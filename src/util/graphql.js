@@ -13,6 +13,9 @@ export const LOGIN_USER = gql `
         email
         username
         id
+        favoritedKeys {
+          id
+        }
         token
         name
         createdAt
@@ -24,9 +27,8 @@ export const LOGIN_USER = gql `
         active
         title
         username
-        address {
-          code
-        }
+        userId
+        address 
       }
     }
   }
@@ -99,6 +101,43 @@ export const CREATE_KEY_MUTATION = gql`
       address {
         code
       }
+    }
+  }
+`
+
+export const CREATE_ADDRESS_MUTATION = gql`
+  mutation createAddress(
+      $userId: ID!,
+      $code: String!,
+      $type: String,
+      $street: String,
+      $number: String,
+      $complement: String,
+      $neighborhood: String,
+      $city: String
+    ) {
+    createAddress(
+      addressInput:{
+        userId: $userId,
+        code: $code,
+        type: $type,
+        street: $street,
+        number: $number,
+        complement: $complement,
+        neighborhood: $neighborhood,
+        city: $city
+      }
+    ) {
+      id
+      userId
+      code
+      type
+      street
+      number
+      complement
+      neighborhood
+      city
+      country
     }
   }
 `

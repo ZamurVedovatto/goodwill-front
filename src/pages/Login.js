@@ -41,7 +41,7 @@ export default function Login(props) {
               name="username"
               type="text"
               value={values.username}
-              error={errors.username ? true : false}
+              error={errors?.username ? true : false}
               onChange={onChange}
             />
             <Form.Input
@@ -50,7 +50,7 @@ export default function Login(props) {
               name="password"
               type="password"
               value={values.password}
-              error={errors.password ? true : false}
+              error={errors?.password ? true : false}
               onChange={onChange}
             />
             <Button type="submit" primary>

@@ -4,6 +4,7 @@ import { AuthContext } from './../context/auth'
 import bgImg from './../assets/bg.png'
 import DeleteUserButton from '../components/DeleteUserButton'
 import UserProfileForm from '../components/UserProfileForm'
+import FormAddress from '../components/User/FormAddress'
 
 export default function UserSettings() {
   const { user, logout } = useContext(AuthContext)
@@ -49,6 +50,11 @@ export default function UserSettings() {
                     onClick={handleItemClick}
                   />
                   <Menu.Item
+                    name='endereço'
+                    active={activeItem === 'endereço'}
+                    onClick={handleItemClick}
+                  />
+                  <Menu.Item
                     name='alterar senha'
                     active={activeItem === 'alterar senha'}
                     onClick={handleItemClick}
@@ -66,6 +72,13 @@ export default function UserSettings() {
                   activeItem === 'editar perfil' && (
                     <Segment>
                       <UserProfileForm user={user} />
+                    </Segment>
+                  )
+                }
+                {
+                  activeItem === 'endereço' && (
+                    <Segment>
+                      <FormAddress user={user} />
                     </Segment>
                   )
                 }

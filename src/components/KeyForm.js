@@ -8,7 +8,6 @@ import keyTypes from './../util/consts/keyTypes';
 
 import FormKeyGeneric from './Key/FormKeyGeneric'
 import FormKeySimpleInput from './Key/FormKeySimpleInput'
-import FormKeyAddress from './Key/FormKeyAddress';
 
 export default function KeyForm({ user, setActiveItem, refetch }) {
   const [values, setValues] = useState({
@@ -16,6 +15,7 @@ export default function KeyForm({ user, setActiveItem, refetch }) {
     username: user.username,
     type: 'generic',
     title: uuid(),
+    address: {}
   })
 
   const onChange = (event) => {
@@ -121,7 +121,7 @@ export default function KeyForm({ user, setActiveItem, refetch }) {
           }
           {
             (values.type === 'address') &&
-            <FormKeyAddress values={values} onChange={onChange} error={error} createKeyCallback={createKeyCallback} />
+              <span>send user to user-settings</span>
           }
         </Card.Content>
       </Card>
