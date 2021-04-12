@@ -1,12 +1,14 @@
 import { useMutation } from '@apollo/client'
 import React, { useState } from 'react'
 import { Button, Form, Segment, Message, Icon } from 'semantic-ui-react'
-import { CREATE_ADDRESS_MUTATION, GET_ADDRESS_BY_CEP } from '../../util/graphql'
+import { CREATE_ADDRESS_MUTATION } from '../../util/graphql'
 import { useForm } from '../../util/hooks/useForm'
-import CEPInput from '../General/CEPInput'
 import addressTypes from './../../util/consts/addressTypes'
 
+import useFillAddress from './../../util/hooks/useFillAddress'
+
 export default function FormAddress({user}) {
+  const { address, onSetAddress } = useFillAddress()
   const [errors, setErrors] = useState({})
   
   const { onChange, onSubmit, values } = useForm(registerAddress, {
@@ -71,7 +73,8 @@ export default function FormAddress({user}) {
           </Form.Field>
 
           <Form.Field width={8} required>
-            <CEPInput ></CEPInput>
+            <input onChange={(e) => onSetAddress(e.target.value)}></input>
+            <pre>{JSON.stringify(address, null, 2)}</pre>
           </Form.Field>
         </Form.Group>
 
