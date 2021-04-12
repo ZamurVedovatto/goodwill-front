@@ -3269,6 +3269,14 @@
   "resolved" "https://registry.npmjs.org/caseless/-/caseless-0.12.0.tgz"
   "version" "0.12.0"
 
+"cep-promise@^4.1.0":
+  "integrity" "sha512-8Xe8nNtTnumMFnKkdO7mFwbJLdJek4JXku0M+AUE6tXPuaHSp/ea5MgSWA/P7K74C1H3okLy0xUWxC9F/90+bA=="
+  "resolved" "https://registry.npmjs.org/cep-promise/-/cep-promise-4.1.0.tgz"
+  "version" "4.1.0"
+  dependencies:
+    "node-fetch" "2.6.1"
+    "unfetch" "4.1.0"
+
 "chalk@^2.0.0":
   "integrity" "sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ=="
   "resolved" "https://registry.npmjs.org/chalk/-/chalk-2.4.2.tgz"
@@ -7729,6 +7737,11 @@
     "lower-case" "^2.0.2"
     "tslib" "^2.0.3"
 
+"node-fetch@2.6.1":
+  "integrity" "sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw=="
+  "resolved" "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.1.tgz"
+  "version" "2.6.1"
+
 "node-forge@^0.10.0":
   "integrity" "sha512-PPmu8eEeG9saEUvI97fm4OYxXVB6bFvyNTyiUOBichBpFG8A1Ljw3bY62+5oOjDEMHRnd0Y7HQ+x7uzxOzC6JA=="
   "resolved" "https://registry.npmjs.org/node-forge/-/node-forge-0.10.0.tgz"
@@ -11354,6 +11367,11 @@
     "has-bigints" "^1.0.0"
     "has-symbols" "^1.0.0"
     "which-boxed-primitive" "^1.0.1"
+
+"unfetch@4.1.0":
+  "integrity" "sha512-crP/n3eAPUJxZXM9T80/yv0YhkTEx2K1D3h7D1AJM6fzsWZrxdyRuLN0JH/dkZh1LNH8LxCnBzoPFCPbb2iGpg=="
+  "resolved" "https://registry.npmjs.org/unfetch/-/unfetch-4.1.0.tgz"
+  "version" "4.1.0"
 
 "unicode-canonical-property-names-ecmascript@^1.0.4":
   "integrity" "sha512-jDrNnXWHd4oHiTZnx/ZG7gtUTVp+gCcTTKr8L0HjlwphROEW3+Him+IpvC+xcJEFegapiMZyZe02CyuOnRmbnQ=="

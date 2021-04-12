@@ -6,7 +6,10 @@ import DeleteUserButton from '../components/DeleteUserButton'
 import UserProfileForm from '../components/UserProfileForm'
 import FormAddress from '../components/User/FormAddress'
 
+import useFillAddress from './../util/hooks/useFillAddress'
+
 export default function UserSettings() {
+  const { address, onSetAddress } = useFillAddress()
   const { user, logout } = useContext(AuthContext)
   const [activeItem, setActiveItem] = useState('editar perfil')
   const [loading, setLoading] = useState(true)
@@ -28,6 +31,8 @@ export default function UserSettings() {
 
   return (
     <Container>
+      <input onChange={(e) => onSetAddress(e.target.value)}></input>
+      <pre>{JSON.stringify(address, null, 2)}</pre>
       <Grid columns={1}>
         <Grid.Column width={16}>
           <Grid.Row className="page-title">
