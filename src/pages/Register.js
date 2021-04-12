@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
 
 import { AuthContext } from './../context/auth'
-import { useForm } from './../util/hooks'
+import { useForm } from './../util/hooks/useForm'
 
 export default function Register(props) {
   const context = useContext(AuthContext)

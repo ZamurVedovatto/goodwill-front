@@ -142,6 +142,18 @@ export const CREATE_ADDRESS_MUTATION = gql`
   }
 `
 
+export const GET_ADDRESS_BY_CEP = gql`
+query getAddressByCep($cep: String!) {
+  getAddressByCep(cep: $cep){
+    cep
+    state
+    city
+    neighborhood
+    street
+  }
+}
+`
+
 export const DELETE_KEY_MUTATION = gql`
   mutation deleteKey($userId: ID!, $keyId: ID!) {
     deleteKey(userId: $userId, keyId: $keyId)

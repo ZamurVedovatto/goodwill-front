@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Button, Form, Container, Segment } from 'semantic-ui-react'
 import { useMutation, useQuery } from '@apollo/client'
-import { useForm } from './../../util/hooks'
+import { useForm } from './../../util/hooks/useForm'
 import { FETCH_MESSAGES_QUERY, CREATE_MESSAGE_MUTATION, FETCH_KEYS_QUERY } from './../../util/graphql'
 import SearchComponent from './../Message/SearchComponent'
 import { AuthContext } from './../../context/auth'

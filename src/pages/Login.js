@@ -3,7 +3,7 @@ import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
 import { useMutation } from '@apollo/client'
 import { LOGIN_USER } from './../util/graphql'
 import { AuthContext } from './../context/auth'
-import { useForm } from './../util/hooks'
+import { useForm } from './../util/hooks/useForm'
 import { Link } from 'react-router-dom'
 
 export default function Login(props) {

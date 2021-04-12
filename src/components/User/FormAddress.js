@@ -1,8 +1,9 @@
 import { useMutation } from '@apollo/client'
 import React, { useState } from 'react'
 import { Button, Form, Segment, Message, Icon } from 'semantic-ui-react'
-import { CREATE_ADDRESS_MUTATION } from '../../util/graphql'
-import { useForm } from '../../util/hooks'
+import { CREATE_ADDRESS_MUTATION, GET_ADDRESS_BY_CEP } from '../../util/graphql'
+import { useForm } from '../../util/hooks/useForm'
+import CEPInput from '../General/CEPInput'
 import addressTypes from './../../util/consts/addressTypes'
 
 export default function FormAddress({user}) {
@@ -11,7 +12,7 @@ export default function FormAddress({user}) {
   const { onChange, onSubmit, values } = useForm(registerAddress, {
     userId: "",
     code: "",
-    type: "",
+    type: "casa",
     street: "",
     number: "",
     complement: "",
@@ -30,11 +31,23 @@ export default function FormAddress({user}) {
   })
 
   function registerAddress() {
-    addAddress()
+    console.log(values)
+    // addAddress()
+  }
+
+  const onSetSelection = (key) => {
+    let event = {
+      target: {
+        name: "type",
+        value: key.value
+      }
+    }
+    onChange(event)
   }
 
   return (
     <Form
+        loading={loading}
         onSubmit={onSubmit}
         noValidate
         className={loading ? 'loading' : ''}
@@ -42,24 +55,23 @@ export default function FormAddress({user}) {
       >
       <Segment vertical>
         <Form.Group>
-          <Form.Field width={12}>
-            <Form.Select
-              fluid
-              label='Tipo'
-              options={addressTypes}
-              placeholder='Tipo'
-              value={values.type}
-              error={errors.type ? true : false}
-              onChange={onChange}
-            />
+          <Form.Field width={8}>
+            <label>Modalidade</label>
+            <div>
+              {!loading && addressTypes?.map((addressType) => (
+                <Button
+                  type="button"
+                  primary
+                  basic={addressType.title !== values.type}
+                  style={{ margin: " .25rem .15rem"}} compact circular key={addressType.key}
+                  onClick={() => onSetSelection(addressType)}  
+                >{addressType.text}</Button>
+              ))}
+            </div>
           </Form.Field>
-          <Form.Field  width={4} required>
-            <Form.Input
-              control='input' type='number' max={8} label='CEP' placeholder='CEP'
-              value={values.code}
-              error={errors.code ? true : false}
-              onChange={onChange}
-            />
+
+          <Form.Field width={8} required>
+            <CEPInput ></CEPInput>
           </Form.Field>
         </Form.Group>
 
@@ -67,9 +79,8 @@ export default function FormAddress({user}) {
           <Form.Field width={12}>
             <Form.Input
               fluid label='Rua/Logradouro' placeholder='Rua/Logradouro'
-              value={values.street}  
-              error={errors.street ? true : false}
-              onChange={onChange}
+              value={values.street}
+              readOnly
             />
           </Form.Field>
           <Form.Field required width={4}>
@@ -95,17 +106,15 @@ export default function FormAddress({user}) {
           <Form.Field>
             <Form.Input
               fluid label='Bairro' placeholder='Bairro'
-              value={values.neighborhood} 
-              error={errors.neighborhood ? true : false}
-              onChange={onChange}
+              value={values.neighborhood}
+              readOnly
             />
           </Form.Field>
           <Form.Field>
             <Form.Input
               label='Cidade' placeholder='Cidade'
               value={values.city}
-              error={errors.city ? true : false}
-              onChange={onChange}
+              readOnly
             />
           </Form.Field>
         </Form.Group>
