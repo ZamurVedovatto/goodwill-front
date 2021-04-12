@@ -8,22 +8,26 @@ const useFillAddress = () => {
 
   const onSetAddress = async (cep) => {
     if (cep.length === 8 && cep !== currCep) {
-      const data = await cepPromise(cep)
-      console.log(data)
-      setAddress(data)
-      console.log(address)
-
-      // TODO 
-      // if success
-      setCurrCep(cep)
-      setSuccess(true)
-      // else
-      setSuccess(false)
-
+      cepPromise(cep)
+        .then(data => {
+          if (data.message) {
+            setAddress({})
+            setSuccess(false)
+          } else {
+            console.log(data)
+            setAddress(data)
+            setCurrCep(cep)
+            setSuccess(true)
+          }
+        })
+        .catch(error => {
+          setAddress({})
+          setSuccess(false)
+        })
     }
   }
 
-  return { address, onSetAddress }
+  return { success, address, onSetAddress }
 }
 
 export default useFillAddress

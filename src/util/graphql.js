@@ -138,6 +138,34 @@ export const CREATE_ADDRESS_MUTATION = gql`
       neighborhood
       city
       country
+      asKey
+    }
+  }
+`
+
+export const FETCH_USER_ADDRESSES = gql`
+  query getUserAddresses($userId: ID!) {
+    getUserAddresses(userId: $userId) {
+      id
+      code
+      type
+      street
+      number
+      complement
+      neighborhood
+      city
+      country
+      userId
+      asKey
+    }
+  }
+`
+
+export const SET_ADDRESS_AS_KEY = gql`
+  mutation setAddressAsKey($addressId: ID!){
+    setAddressAsKey(addressId: $addressId){
+      id
+      asKey
     }
   }
 `

@@ -5,6 +5,7 @@ import bgImg from './../assets/bg.png'
 import DeleteUserButton from '../components/DeleteUserButton'
 import UserProfileForm from '../components/UserProfileForm'
 import FormAddress from '../components/User/FormAddress'
+import RegisteredAddresses from '../components/User/RegisteredAddresses'
 
 
 export default function UserSettings() {
@@ -79,6 +80,7 @@ export default function UserSettings() {
                 {
                   activeItem === 'endereço' && (
                     <Segment>
+                      <RegisteredAddresses user={user} />
                       <FormAddress user={user} />
                     </Segment>
                   )
