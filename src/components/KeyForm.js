@@ -119,10 +119,6 @@ export default function KeyForm({ user, setActiveItem, refetch }) {
             (values.type === 'plate' || values.type === 'schoolId')  &&
             <FormKeySimpleInput values={values} onChange={onChange} error={error} createKeyCallback={createKeyCallback} />
           }
-          {
-            (values.type === 'address') &&
-              <span>send user to user-settings</span>
-          }
         </Card.Content>
       </Card>
     </>

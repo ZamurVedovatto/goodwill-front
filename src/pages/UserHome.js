@@ -5,6 +5,7 @@ import KeyList from './../components/KeyList'
 import { AuthContext } from './../context/auth'
 import { FETCH_USER_KEYS_QUERY } from './../util/graphql'
 import AddKey from '../components/Key/AddKey'
+import RegisteredAddresses from '../components/User/RegisteredAddresses'
 
 export default function UserHome() {
   const { context, user } = useContext(AuthContext)
@@ -39,6 +40,11 @@ export default function UserHome() {
               onClick={handleItemClick}
             />
             <Menu.Item
+              name='Chaves Endereço'
+              active={activeItem === 'Chaves Endereço'}
+              onClick={handleItemClick}
+            />
+            <Menu.Item
               name='Chaves Serviço'
               active={activeItem === 'Chaves Serviço'}
               onClick={handleItemClick}
@@ -58,9 +64,13 @@ export default function UserHome() {
         {
           (activeItem === 'Adicionar Chave') && <AddKey setActiveItem={setActiveItem} refetch={refetch} />
         }
-          {
+        {
           (activeItem === 'Chaves Serviço') &&
-          <span>Chaves Serviço</span>
+            <span>Chaves Serviço</span>
+        }
+        {
+          (activeItem === 'Chaves Endereço') &&
+            <RegisteredAddresses user={user} />
         }
         {
           (activeItem === 'minhas chaves') &&
